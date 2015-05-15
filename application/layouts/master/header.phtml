@@ -1,0 +1,33 @@
+<div class="row">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="glyphicon glyphicon-arrow-down"></span>
+                <?= $this->translate('MENU'); ?>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="collapse">
+            <?= $this->navigation()->menu()->setUlClass("nav navbar-nav"); ?>
+        </div>
+
+    </nav>
+</div>
+
+<header class="row">
+    <div class="col-lg-4 col-sm-5">
+        <h1 class="nice-font">
+            <a href="/home"><?= $this->translate('Helena Osokina'); ?></a>
+        </h1>
+    </div>
+
+    <div class="col-lg-8 col-sm-7">
+        <h4 class="nice-font">
+            <a href="/home">
+                <?= $this->translate(
+                    'Тут ви зможете підібрати до вашого стилю унікальну в свому роді річ. а також всілякі статі та все що повязані з бісероплетінням.'
+                ); ?>
+            </a>
+        </h4>
+    </div>
+</header>

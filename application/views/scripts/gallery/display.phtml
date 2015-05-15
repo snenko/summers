@@ -1,0 +1,30 @@
+<div class="page-header">
+    <h2><?= $this->escape($this->gallery['galleryname']) ?></h2>
+</div>
+
+
+<!--заголовок галереї+опис+зображення-->
+<div>
+    <?=
+    $this->partial(
+        '/gallery/row/gallery-admin-panel.phtml',
+        array('galleryid' => $this->gallery['galleryid'])
+    );
+    ?>
+    <div class="caption">
+        <?php $picture = "/photos/md/" . $this->escape($this->gallery['picture']); ?>
+
+        <img class="img-thumbnail"
+             alt="<?= $this->escape($this->gallery['description']); ?>"
+             src="<?= $picture; ?>">
+
+        <p>
+            <?= $this->escape($this->gallery['description']); ?>
+        </p>
+    </div>
+
+</div>
+
+<!--    products-->
+<?= $this->partial('/product/row/product-table.phtml', array('products' => $this->products)); ?>
+

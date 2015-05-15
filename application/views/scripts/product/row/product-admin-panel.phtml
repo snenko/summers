@@ -1,0 +1,28 @@
+<?php IF(Acl::getInstance()->getRole()==Acl::ROLE_ADMIN): ?>
+
+<div class="btn-group" role="group">
+
+    <?php IF ($this->productid): ?>
+
+        <?php $url_edit   = $this->url(array('id' => $this->productid), 'product-update'); ?>
+        <?php $url_delete = $this->url(array('id' => $this->productid), 'product-delete'); ?>
+
+        <a class="btn btn-warning" href="<?= $url_edit; ?>" title="<?= $this->translate('product-update'); ?>">
+            <span class="glyphicon glyphicon-pencil"></span><?= $this->translate('product-update'); ?>
+        </a>
+        <a class="btn btn-danger" href="<?= $url_delete; ?>" title="<?= $this->translate('product-delete'); ?>">
+            <span class="glyphicon glyphicon-remove"></span><?= $this->translate('product-delete'); ?>
+        </a>
+
+    <?php ELSE:?>
+        <?php $url_prod_create = $this->url(array(), 'product-create'); ?>
+
+        <a class="btn btn-danger" href="<?= $url_prod_create; ?>">
+            <?= $this->translate('product-create'); ?>
+        </a>
+
+    <?php ENDIF;?>
+
+</div>
+
+<?php ENDIF;?>

@@ -1,0 +1,34 @@
+<?php IF(Acl::getInstance()->getRole()==Acl::ROLE_ADMIN): ?>
+
+<div class="btn-group" role="group">
+
+    <?php IF ($this->galleryid): ?>
+
+        <?php $url_prod_create = $this->url(array('gallery' => $this->galleryid), 'product-create'); ?>
+        <?php $url_edit = $this->url(array('id' => $this->galleryid), 'gallery-update'); ?>
+        <?php $url_delete = $this->url(array('id' => $this->galleryid), 'gallery-delete'); ?>
+
+        <a class="btn btn-info" href="<?= $url_prod_create; ?>">
+            <?= $this->translate('product-create'); ?>
+        </a>
+
+        <a class="btn btn-warning" href="<?= $url_edit; ?>">
+            <?= $this->translate('gallery-update'); ?>
+        </a>
+
+        <a class="btn btn-danger" href="<?= $url_delete; ?>">
+            <?= $this->translate('gallery-delete'); ?>
+        </a>
+
+    <?php ELSE: ?>
+        <?php $url_gall_create = $this->url(array(), 'gallery-create'); ?>
+
+        <a class="btn btn-info" href="<?= $url_gall_create; ?>">
+            <?= $this->translate('gallery-create'); ?>
+        </a>
+
+    <?php ENDIF; ?>
+
+</div>
+
+<?php ENDIF; ?>

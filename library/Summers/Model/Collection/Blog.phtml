@@ -1,0 +1,46 @@
+<?php
+//
+class Summers_Model_Collection_Blog extends Doctrine_Collection
+{
+    function __construct($table, $keyColumn = null)
+    {
+        parent::__construct($table, $keyColumn);
+    }
+//
+//    public static function setBlogs($active = true)
+//    {
+//        $q = Doctrine_Query::create()
+//            ->from('Summers_Model_Blog b')
+//            ->where('b.blogstatus =?',(($active)?1:0));
+//
+//        return (Summers_Model_Collection_Blog) $q->fetchArray();
+//    }
+//
+//    function setMask_ToFullArray()
+//    {
+//        foreach ($this as $key => $value) {
+//            $this[$key]['mask']
+//                = $this->maskToArray($this[$key]['mask']);
+//        }
+//    }
+//
+//    /**
+//     * from str to array
+//     *
+//     * @param $mask
+//     *
+//     * @return array|bool
+//     */
+//    function maskToArray($mask)
+//    {
+//        if ($mask) {
+//            return Summers_Snenko::getArray($mask);
+//        }
+//        return $mask;
+//    }
+//
+////    public function getBlogs()
+////    {
+////        return $this->_blogs;
+////    }
+}

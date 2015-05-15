@@ -1,0 +1,10 @@
+<?php if (Zend_Auth::getInstance()->hasIdentity()): ?>
+    <div class="navbar-text navbar-right">
+        <a class="navbar-default " href="<?php echo $this->url(array(), 'carousel'); ?>"><?= $this->translate('carousel'); ?></a>
+        <a class="navbar-default " href="<?php echo $this->url(array(), 'logout'); ?>"><?= $this->translate('logout'); ?></a>
+    </div>
+<?php else: ?>
+    <div class="navbar-text navbar-right">
+        <a class="navbar-link" href="<?php echo $this->url(array(), 'login'); ?>"><?= $this->translate('login'); ?></a>
+    </div>
+<?php endif; ?>

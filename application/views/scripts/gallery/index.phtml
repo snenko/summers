@@ -1,0 +1,11 @@
+<div class="page-header">
+    <h2><?= $this->translate('gallery') ?></h2>
+</div>
+
+<div>
+
+    <?= $this->partial('/gallery/row/gallery-admin-panel.phtml'); ?>
+
+    <?= $this->partial('gallery/row/galleries.phtml', array('galleries' => $this->records) ); ?>
+
+</div>

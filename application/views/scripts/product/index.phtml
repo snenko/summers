@@ -1,0 +1,7 @@
+<div class="page-header">
+    <h2><?= $this->translate('product') ?></h2>
+</div>
+<?= $this->partial('/product/row/product-admin-panel.phtml'); ?>
+
+<?= $this->partial('/product/row/product-table.phtml', array('products' => $this->products)); ?>
+

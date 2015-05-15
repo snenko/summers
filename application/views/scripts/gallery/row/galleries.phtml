@@ -1,0 +1,33 @@
+<div>
+
+    <?php if ($this->galleries > 0): ?>
+
+        <?php $dir = Zend_Registry::get('config')->md->dir; ?>
+
+        <?php foreach ($this->galleries as $r): ?>
+
+            <?php $picture = $dir."/".$this->escape($r['picture']); ?>
+            <?php $description = $this->escape($r['description']); ?>
+            <?php $galleryname = $this->escape($r['galleryname']); ?>
+            <?php $url_gall_display = $this->url(array('id' => $r['galleryid']), 'gallery-display'); ?>
+
+            <?= $this->partial('/gallery/row/gallery-admin-panel.phtml', array('galleryid' => $r['galleryid'])); ?>
+            <div class="caption">
+
+                <a href="<?= $url_gall_display ?>">
+                    <img class="img-thumbnail" alt="<?= $description ?>"
+                         src="<?= $picture ?>">
+                    <p><?= $galleryname ?></p>
+                </a>
+
+            </div>
+
+        <?php endforeach; ?>
+
+    <?php else: ?>
+
+        <p><?php echo $this->translate('not have records'); ?></p>
+
+    <?php endif; ?>
+
+    <div/>

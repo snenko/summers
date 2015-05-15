@@ -1,0 +1,13 @@
+<?php IF ($this->mask): ?>
+    <div class="pull-right">
+
+        <?php FOREACH ($this->mask as $mask): ?>
+
+            <a class="btn btn-default" href="#" role="button">
+                <?= $mask; ?>
+            </a>
+
+        <?php ENDFOREACH; ?>
+
+    </div>
+<?php ENDIF; ?>

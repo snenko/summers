@@ -1,0 +1,25 @@
+<tr>
+    <td><?= $this->product['num-row']; ?></td>
+    <td>
+        <a href="<?= $this->url(array('id' => $this->product['productid']), 'product-display'); ?>">
+            <?= $this->escape($this->product['name']); ?>
+        </a>
+    </td>
+    <td>
+        <?php $url= $this->url(array('id' => $this->product['productid']), 'product-display'); ?>
+        <a href="<?= $url; ?>">
+            <img class="thumbnail" src="<?= $this->product['picture']; ?>"/>
+        </a>
+    </td>
+    <td><?= $this->escape($this->product['description']); ?></td>
+
+    <td>
+        <!--розміщуємо галереї-->
+        <?= $this->partial('/product/row/galleries.phtml', array('galleries' => $this->product['galleries']));?>
+
+    </td>
+
+    <td>
+        <?= $this->partial('/product/row/product-admin-panel.phtml', array('productid' => $this->product['productid']));?>
+    </td>
+</tr>

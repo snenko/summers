@@ -1,0 +1,22 @@
+<div class="page-header">
+    <h2><?= $this->escape($this->product['name']) ?></h2>
+</div>
+
+<?= $this->partial('/product/row/product-admin-panel.phtml', array('productid' => $this->product['productid'])); ?>
+
+<!--заголовок галереї+опис+зображення-->
+<div>
+
+    <section>
+        <article>
+            <?= $this->escape($this->product['description']); ?>
+        </article>
+        <?= $this->partial('/product/row/product-url.phtml', array('url' => $this->product['url'])); ?>
+    </section>
+    <!--        photos-->
+    <?= $this->partial('/product/row/pictures.phtml', array('pictures' => $this->product['pictures'])); ?>
+    <!--        galleries-->
+    <?= $this->partial('/product/row/galleries.phtml', array('galleries' => $this->product['gallerys']));?>
+
+</div>
+

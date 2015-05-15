@@ -1,0 +1,8 @@
+<?php IF($this->escape($this->url)): ?>
+    <div>
+        <a href="<?php echo $this->escape($this->url); ?>">
+            <span class="glyphicon glyphicon-pushpin"></span> <?php echo $this->translate('link to blog'); ?>
+            <span class="glyphicon glz\zyphicon-arrow-down"></span>
+        </a>
+    </div>
+<?php ENDIF;?>

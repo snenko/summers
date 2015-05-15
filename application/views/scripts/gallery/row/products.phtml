@@ -1,0 +1,29 @@
+<div>
+
+    <?php if ($this->products > 0): ?>
+
+        <?php foreach ($this->products as $p): ?>
+
+            <?= $this->partial('/product/row/product-admin-panel.phtml', array('productid' => $p['productid'])); ?>
+            <div>
+
+                <a href="<?php echo $this->url(array('id' => $p['productid']), 'product-display'); ?>">
+
+                    <img alt="" src="/photos/md/<?php echo $this->escape($p['pictures'][0]); ?>">
+
+                    <p><?php echo $this->escape($p['name']); ?></p>
+                </a>
+
+            </div>
+
+        <?php endforeach; ?>
+
+    <?php else: ?>
+
+        <p>
+            <?php echo $this->translate('not have products'); ?>
+        </p>
+
+    <?php endif; ?>
+
+    <div/>

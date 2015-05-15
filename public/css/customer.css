@@ -1,0 +1,15 @@
+body { padding-top: 70px; }
+
+footer {
+    padding: 2em 0;
+    margin: 3em 0;
+    border-top: 1px solid #ddd;
+    color: #999;
+    text-align: center;
+}
+
+.nice-font {
+    font-style: italic;
+    font-weight: bold;
+    font-family: Georgia,serif;
+}

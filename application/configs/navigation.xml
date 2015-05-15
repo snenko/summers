@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <home>
+        <label>home</label>
+        <uri>/home</uri>
+        <resource>guest_allow</resource>
+    </home>
+    <gallery>
+        <label>gallery</label>
+        <uri>/gallery</uri>
+        <resource>guest_allow</resource>
+        <privilege>index</privilege>
+        <!--<resource>mvc:users</resource>-->
+    </gallery>
+    <product>
+        <label>product</label>
+        <uri>/product</uri>
+        <privilege>index</privilege>
+        <resource>guest_allow</resource>
+    </product>
+    <blog>
+        <label>blog</label>
+        <uri>/blog</uri>
+        <privilege>index</privilege>
+        <resource>guest_allow</resource>
+    </blog>
+    <contacts>
+        <label>contacts</label>
+        <uri>/contacts</uri>
+        <privilege>index</privilege>
+        <resource>guest_allow</resource>
+    </contacts>
+
+    <!--адмінка-->
+    <carousel>
+        <label>carousel</label>
+        <uri>/carousel</uri>
+        <privilege>admin</privilege>
+        <resource>admin_allow</resource>
+    </carousel>
+    <logout>
+        <label>logout</label>
+        <uri>/logout</uri>
+        <privilege>user</privilege>
+        <resource>user_allow</resource>
+    </logout>
+</config>

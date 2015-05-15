@@ -1,0 +1,21 @@
+<div>
+    <div id="error-image">
+        <img src="/img/error.gif"/>
+    </div>
+    <div id="error-message">
+        <h1><?= $this->title; ?></h1>
+        <?= $this->message; ?>
+    </div>
+</div>
+
+<?php if ('development' == APPLICATION_ENV): ?>
+<div id="error-data">
+    <h2>Role: </h2>
+    <pre><?php echo $this->role ?></pre>
+
+    <h2>Resource:</h2>
+    <pre><?php echo $this->resource ?></pre>
+
+    <pre><?php echo $this->stack_trace ?></pre>
+</div>
+<?php endif ?>

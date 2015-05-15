@@ -1,0 +1,8 @@
+<?php IF ($this->galleries): ?>
+    <?php FOREACH ($this->galleries as $key => $value): ?>
+        <?php $url = $this->url(array('id' => $key), 'gallery-display'); ?>
+        <a class="btn btn-link" href="<?= $url; ?>">
+            <?= $this->escape($value['galleryname']); ?>
+        </a>
+    <?php ENDFOREACH; ?>
+<?php ENDIF; ?>
