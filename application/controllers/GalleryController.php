@@ -166,7 +166,6 @@ class GalleryController extends Zend_Controller_Action
 
     public function updateAction()
     {
-
         $form = new Summers_Form_Gallery();
         $form->populate($_POST);
 

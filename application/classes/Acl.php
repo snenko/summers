@@ -123,8 +123,11 @@ class Acl extends Zend_Acl
     public function getResource()
     {
         $request = Zend_Controller_Front::getInstance();
-        $controller = $request->getRequest()->getParams()['controller'];
-        $action = $request->getRequest()->getParams()['action'];
+        $controller_ = $request->getRequest()->getParams();
+        $action_ = $request->getRequest()->getParams();
+
+        $controller = $controller_['controller'];
+        $action = $action_['action'];
 
         return "{$controller}/{$action}";
     }
