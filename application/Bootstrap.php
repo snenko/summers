@@ -100,7 +100,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // Чіпляємо ACL до Zend_Navigation
         Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
-        Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole($acl->getRole());
+        Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole($acl->getCurrentRole());
 
         return $acl;
 
@@ -117,9 +117,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $registry = Zend_Registry::getInstance();
         $registry->set('Zend_Navigation', $conteiner);
 
-        Zend_Controller_Action_HelperBroker::addHelper(
-            new Summers_Controller_Action_Helper_Navigation()
-        );
+//        Zend_Controller_Action_HelperBroker::addHelper(
+//            new Summers_Controller_Action_Helper_Navigation()
+//        );
+
     }
 
     protected function _initAuth()

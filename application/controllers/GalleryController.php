@@ -2,17 +2,6 @@
 
 class GalleryController extends Zend_Controller_Action
 {
-    public function preDispatch()
-    {
-
-//        if(Zend_Auth::getInstance()->hasIdentity()){
-//            //$url = $this->getRequest()->getRequestUri();
-//            //$this->_helper->layout->setLayout('admin');
-//            $this->view->isadmin = true;
-//
-//        }
-    }
-
     public function init()
     {
         /* Initialize action controller here */
@@ -37,12 +26,17 @@ class GalleryController extends Zend_Controller_Action
 
                 if ($form->isValid($postData)) {
 
-                    $res_id = (new Summers_Model_Gallery)
-                        ->setGalleryAdapterForm($form);
-                    if (!$res_id) {
+                    $pic_adapter = $form->picture->getTransferAdapter();
+
+                    $item = new Summers_Model_Gallery();
+                    $item->setAdapter($pic_adapter);
+                    $item->fromArray($form->getValues());
+                    $item->save();
+
+                    if ($item->getErrorStack()->toArray()) {
                         throw new Zend_Controller_Action_Exception('Invalid saved');
                     }
-                    $this->_helper->snenko->gotoAfterAction('gallery', $res_id);
+                    $this->_helper->snenko->gotoAfterAction('gallery', $item->galleryid);
                 }
             } elseif ($form->cancel->isChecked()) {
                 $this->_helper->snenko->gotoAfterAction('gallery');
@@ -64,16 +58,16 @@ class GalleryController extends Zend_Controller_Action
                 if ($form->isValid($postData)) {
                     $values = $form->getValues();
 
-                    $gall = (new Summers_Model_Gallery)->getGallery($values['id']);
+                    //$gall = (new Summers_Model_Gallery)->getGallery($values['id']);
+                    $gallery_name = Doctrine::getTable('Summers_Model_Gallery')->find($values['id'])->galleryname;
+
                     $p = (new Summers_Model_Gallery)->deleteGallery($values['id']);
 
                     if(!$p){
                         throw new Zend_Controller_Action_Exception('Can`t delete!');
                     }
-                    //Успіх, переходимо на success
-                    $this->_helper->getHelper('FlashMessenger')
-                        ->addMessage('Gallery "'.$gall[0]['galleryname'].'" has deleted');
-                    $this->_redirect('/gallery/success');
+                    $this->_helper->getHelper('FlashMessenger')->addMessage('Gallery "'.$gallery_name.'" has deleted');
+                    $this->redirect('/gallery/success');
                 }
             }
 
@@ -106,26 +100,6 @@ class GalleryController extends Zend_Controller_Action
         }
 
         $this->view->form = $form;
-
-//        $input = new Zend_Filter_Input(
-//            array('id' => array('HtmlEntities', 'StripTags', 'StringTrim')),
-//            array('id' => array('NotEmpty', 'Int')));
-//        $input->setData($this->getRequest()->getParams());
-//
-//        $form = new Summers_Form_GalleryCreate();
-//        $this->view->form = $form;
-//
-//
-//
-//
-//        if ($input->isValid()&& $form->submit->isChecked()) {
-//            $id = (new Summers_Model_Gallery())->deleteGallery($input->id);
-//
-//            $this->_helper->getHelper('FlashMessenger')->addMessage('The records were successfully deleted.');
-//            $this->redirect('/gallery/success');
-//        } else {
-//            throw new Zend_Controller_Action_Exception('Invalid input');
-//        }
     }
 
     public function displayAction()
@@ -160,36 +134,47 @@ class GalleryController extends Zend_Controller_Action
         if ($this->_helper->getHelper('FlashMessenger')->getMessages()) {
             $this->view->messages = $this->_helper->getHelper('FlashMessenger')->getMessages();
         } else {
-            $this->_redirect('/');
+            $this->redirect('/');
         }
     }
 
     public function updateAction()
     {
-        $form = new Summers_Form_Gallery();
-        $form->populate($_POST);
+        $form = (new Summers_Form_Gallery())->populate($_POST)->setAction('/gallery/update');
+        //при редагуванні, зображення вводити не обовязково
+        $form->picture->setRequired(false);
 
         if ($this->getRequest()->isPost()) {
-
             if ($form->submit->isChecked()) {
-                $postData = $this->getRequest()->getPost();
 
-                if ($form->isValid($postData)) {
-                    $res_id = (new Summers_Model_Gallery)->setGalleryAdapterForm($form);
+                if ($form->isValid($this->getRequest()->getPost())) {
+                    $values = $form->getValues();
 
-                    if (!$res_id) {
+                    $item = Doctrine::getTable('Summers_Model_Gallery')->find($values['galleryid']);
+
+                    //якщо не редагується зображення, то
+                    if (!$values['picture']) {
+                        unset($values['picture']);
+                    } else {
+                        $item->setAdapter($form->picture->getTransferAdapter());
+                        //задаємо сміття, для подальшого видалення
+                        $item->setFilesForDelete($item->picture);
+                    }
+
+                    $item->fromArray($values);
+                    $item->save();
+
+                    if ($item->getErrorStack()->toArray()) {
                         throw new Zend_Controller_Action_Exception('Invalid saved');
                     }
-                    $this->_helper->snenko->gotoAfterAction('gallery', $res_id);
+                    $this->_helper->snenko->gotoAfterAction('gallery', $item->galleryid);
                 }
 
             } elseif ($form->cancel->isChecked()) {
-                $galleryid = $form->getValues()['galleryid'];
-                $this->_helper->snenko->gotoAfterAction('gallery', $galleryid);
+                $gallery = $form->getValues();
+                $this->_helper->snenko->gotoAfterAction('gallery', $gallery['galleryid']);
             }
-
         } else {
-
             $input = (new Zend_Filter_Input(
                 array('id' => array('HtmlEntities', 'StripTags', 'StringTrim')),
                 array('id' => array('NotEmpty', 'Int'))
@@ -197,8 +182,8 @@ class GalleryController extends Zend_Controller_Action
 
             //gallery/update/1 форму загружає данними
             if ($input->isValid()) {
-                if (count($gal = (new Summers_Model_Gallery)->getGallery($input->id)) == 1) {
-                    $form->populate($gal[0]);
+                if ($item = Doctrine::getTable('Summers_Model_Gallery')->find($input->id)) {
+                    $form->populate($item->toArray());
                 } else {
                     throw new Zend_Controller_Action_Exception('Page not found', 404);
                 }
@@ -206,7 +191,6 @@ class GalleryController extends Zend_Controller_Action
                 throw new Zend_Controller_Action_Exception('Invalid input');
             }
         }
-        $form->setAction('/gallery/update');
         $this->view->form = $form;
     }
 
@@ -226,6 +210,7 @@ class GalleryController extends Zend_Controller_Action
 
 
 }
+
 
 
 

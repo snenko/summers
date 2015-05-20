@@ -1,7 +1,7 @@
 ﻿<?php
+
 class Summers_Controller_Action_Helper_Navigation extends Zend_Controller_Action_Helper_Abstract
 {
-
     protected $_container;
 
     // constructor, set navigation container
@@ -15,10 +15,10 @@ class Summers_Controller_Action_Helper_Navigation extends Zend_Controller_Action
     // check current request and set active page
     public function preDispatch()
     {
-        if ($this->getContainer()->findBy('uri', $this->getRequest()->getRequestUri()))
-        {
+        if ($this->getContainer()->findBy('uri', $this->getRequest()->getRequestUri())) {
             $this->getContainer()->findBy('uri', $this->getRequest()->getRequestUri())
-                ->active = true;
+                ->active
+                = true;
         }
     }
 

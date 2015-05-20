@@ -1,0 +1,53 @@
+<?php IF (count($this->products)): ?>
+
+    <div class="bs-example" data-example-id="last-articles">
+        <div id="carousel-product" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+
+                <?php FOREACH ($this->products as $key => $value): ?>
+                    <?php $active = ($key == 0) ? 'active' : ''; ?>
+                    <li data-target="#carousel-product" data-slide-to="<?= $key ?>" class="<?= $active ?>"></li>
+                <?php ENDFOREACH; ?>
+
+            </ol>
+
+            <div class="carousel-inner" role="listbox">
+                <?php FOREACH ($this->products as $key => $c): ?>
+
+                    <?php $active = ($key == 0) ? ' active' : ''; ?>
+                    <?php $picture = '/photos/thumbnails/' . $c['pictures']; ?>
+
+                    <div class="item <?= $active; ?>">
+
+                        <img alt="<?= $c['description'] ?>"
+                             src="<?= $picture ?>"
+                             data-holder-rendered="true">
+
+                        <?php
+                        $url = (!$c['url'] && $c['productid'])
+                            ?
+                            $this->url(array('id' => $c['productid']), 'product-display')
+                            :
+                            $c['url'];
+                        ?>
+
+                        <div class="carousel-caption">
+                            <a href="<?= $url ?>"><?= $c['name'] ?></a>
+                        </div>
+
+                    </div>
+
+                <?php ENDFOREACH; ?>
+            </div>
+            <a class="left carousel-control" href="#carousel-product" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-product" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+<?php ENDIF; ?>

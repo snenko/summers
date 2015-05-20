@@ -8,39 +8,22 @@
 
 class Summers_Snenko
 {
-
-    /**
-     * get Generated unique file name in set catalog
-     *
-     * @param $catalog  : path to files catalog
-     * @param $id       : product's id
-     *
-     * @return string
-     */
-
     static function getCurrentDate()
     {
         return date('Y-m-d H:i:s', mktime());
     }
 
-    static function getNewFileName($catalog)
+    static function getNewFileName($catalog = '')
     {
+        if (!$catalog) {
+            $catalog = self::getPhotoDir();
+        }
         do {
             $fn = uniqid("image_" /*,true*/);
         } while (count(glob("{$catalog}/{$fn}*")) > 0);
 
         return $fn;
     }
-
-//    static function getNewFileName($catalog, $id) {
-//        do {
-//            $gen = uniqid();
-//            $fn= "product_{$id}_{$gen}";
-//
-//        } while (count(glob("{$catalog}/[$fn]*"))>0);
-//
-//        return $fn;
-//    }
 
     /**
      * from string to array
@@ -63,29 +46,64 @@ class Summers_Snenko
             $files = explode(",", $string);
         }
 
-        foreach($files as $key=>$file) {
+        foreach ($files as $key => $file) {
             $files[$key] = trim($file);
         }
 
         return $files;
     }
 
-    //-------------------------------------------------
+    /**
+     * видалення заданих файлів
+     *
+     * @param array $files
+     * @param array $dirs : Видалення в тому числі і підфайлів
+     *
+     * @return bool
+     */
+    public static function deletePictures($files, $dirs = array())
+    {
+        if (!$files) {
+            return false;
+        }
 
+        if (!is_array($files)) {
+            $files = array($files);
+        }
+
+        if (!$dirs) {
+            $dirs = self::getPhotoDirs();
+        }
+
+        foreach ($files as $key => $value) {
+            foreach ($dirs as $dir) {
+                $file = "{$dir}/{$value}";
+
+                if (file_exists($file)) {
+                    unlink($file);
+                }
+            }
+        }
+
+        return true;
+    }
 
     /**
      * Збереження зображення з перейменуванням
      * @param $adapter
      * @param $old_fn
+     *
+     * @return mixed
      */
     public static function SavePicture($adapter, $old_fn)
     {
-        $galleryDir = Zend_Registry::get('config')->uploads->galleryPhotoDir;
-        $gen = Summers_Snenko::getNewFileName($galleryDir);
-        $gen_fn = "{$gen}." . pathinfo($old_fn, PATHINFO_EXTENSION);
+        //нове імя файла
+        $gen_fn = Summers_Snenko::getNewFileName(self::getPhotoDir()) . "." . pathinfo($old_fn, PATHINFO_EXTENSION);
 
+        //змінюємо розмір файла
         return Summers_Snenko::SaveFileWithRandomName($adapter, $gen_fn, $old_fn);
     }
+
     //-------------------------------------------------
 
     /**
@@ -99,8 +117,6 @@ class Summers_Snenko
      */
     public static function SaveFileWithRandomName($adapter, $new_fn, $atribute_label)
     {
-        //$adapter, $gen_fn, $old_fn
-        //--------------------------------------
         /**
          * @var Zend_File_Transfer
          */
@@ -115,8 +131,7 @@ class Summers_Snenko
         $thumbnails = Zend_Registry::get('config')->upload_thumbnails->dir;
         $md = Zend_Registry::get('config')->upload_md->dir;
 
-        try
-        {
+        try {
             //Перейменовуємо зображення
             $adapter->receive($atribute_label);
 
@@ -141,15 +156,14 @@ class Summers_Snenko
 
     /**
      * Зберігає нове зображення з новим розміром
-     * @param $fn   : Назва зображення
-     * @param $dir  : Шлях до файла
+     * @param       $fn         : Назва зображення
+     * @param       $dir        : Шлях до файла
      * @param array $options    : array(out, height, width, quality, strategy)
      *
      * @return string
      */
-    static function Save_ResizePictures($fn, $dir, $options)
+    public static function Save_ResizePictures($fn, $dir, $options)
     {
-
         $out = $options['out'];
 
         $strategy = '';
@@ -165,7 +179,7 @@ class Summers_Snenko
         }
 
         $filter = new Polycast_Filter_ImageSize();
-        $filter->setOutputPathBuilder( new SnenkoPathBuilder("$out"));
+        $filter->setOutputPathBuilder(new SnenkoPathBuilder("$out"));
 
         $filter->getConfig()
             ->setHeight($options['height'])
@@ -176,6 +190,27 @@ class Summers_Snenko
             ->setStrategy($strategy);
 
         return $filter->filter("{$dir}/{$fn}");
+    }
+
+    /**
+     * Повертає массив папок шляхів до зображень
+     * @return mixed
+     */
+    public static function getPhotoDirs()
+    {
+        $dirs['galleryPhotoDir'] = Zend_Registry::get('config')->uploads->galleryPhotoDir;
+        $dirs['upload_thumbnails'] = Zend_Registry::get('config')->upload_thumbnails->dir;
+        $dirs['upload_md'] = Zend_Registry::get('config')->upload_md->dir;
+        return $dirs;
+    }
+
+    /**
+     * Повертає шлях до базової папки зображень
+     * @return mixed
+     */
+    static function getPhotoDir()
+    {
+        return Zend_Registry::get('config')->uploads->galleryPhotoDir;
     }
 }
 
@@ -198,11 +233,17 @@ class SnenkoPathBuilder implements Polycast_Filter_ImageSize_PathBuilder_Interfa
         $basename = strrev(array_pop($chunks));
         $ext = strrev(array_pop($chunks));
 
-        switch($config->getOutputImageType()) {
+        switch ($config->getOutputImageType()) {
 
-            case 'jpeg': $ext = '.jpg'; break;
-            case 'gif': $ext = '.gif'; break;
-            case 'png': $ext = '.png'; break;
+            case 'jpeg':
+                $ext = '.jpg';
+                break;
+            case 'gif':
+                $ext = '.gif';
+                break;
+            case 'png':
+                $ext = '.png';
+                break;
 
             case 'auto':
             case null:
@@ -216,7 +257,8 @@ class SnenkoPathBuilder implements Polycast_Filter_ImageSize_PathBuilder_Interfa
             $postfix = sprintf('%sx%s-q%s', $config->getWidth(), $config->getHeight(), $config->getQuality());
         }
 
-        $path = sprintf('%s/%s%s',
+        $path = sprintf(
+            '%s/%s%s',
             $this->_outputDir,
             $basename,
             $ext
@@ -225,4 +267,3 @@ class SnenkoPathBuilder implements Polycast_Filter_ImageSize_PathBuilder_Interfa
         return $path;
     }
 }
-//$path = Zend_Registry::get('config')->uploads->galleryPhotoDir;

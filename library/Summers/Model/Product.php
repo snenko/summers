@@ -69,7 +69,7 @@ class Summers_Model_Product extends Summers_Model_BaseProduct
                 $dirs[] = Zend_Registry::get('config')->upload_thumbnails->dir;
                 $dirs[] = Zend_Registry::get('config')->upload_md->dir;
 
-                ProductPictures::deletePictures_in_Product($pictures_for_delete, $dirs);
+                Summers_Snenko::deletePictures($pictures_for_delete, $dirs);
             }
             return true;
 
@@ -121,13 +121,11 @@ class Summers_Model_Product extends Summers_Model_BaseProduct
 //    }
 
     /**
-     * вибираємо назви зображення, що відмічені в сітці для видалення
-     * (2=>'gf.jpg', 3=>'fd.jpg', 5=>'sd.jpg')
-     *
-     * @param $productid
+     * вибираємо назви зображення, що відмічені в сітці для видалення (2=>'gf.jpg', 3=>'fd.jpg', 5=>'sd.jpg')
+     * @param $photos
      * @param $checkpictures
      *
-     * @return array|bool
+     * @return array
      */
     public static function getChekedPicture_ForDelete($photos, $checkpictures)
     {
@@ -249,10 +247,10 @@ class Summers_Model_Product extends Summers_Model_BaseProduct
 
     /**
      * Збереження доданих зображень
+     * @param $adapter
+     * @param $galleryDir
      *
-     * @param Zend_File_Transfer $adapter
-     *
-     * @return array : list of saved files
+     * @return array
      */
     static function saveProductFromAdapter($adapter, $galleryDir)
     {
@@ -277,8 +275,8 @@ class Summers_Model_Product extends Summers_Model_BaseProduct
 
     /**
      * get pictures from product
-     *
-     * @param $productid
+     * @param      $productid
+     * @param bool $justOnePic
      *
      * @return array|bool
      */
@@ -313,8 +311,9 @@ class Summers_Model_Product extends Summers_Model_BaseProduct
 
     /**
      * Отримати колекцію продуктів
-     *
      * @param null $galleryid
+     *
+     * @return array
      */
     public static function getProducts_ByGalleries($galleryid=null)
     {
@@ -364,9 +363,23 @@ class Summers_Model_Product extends Summers_Model_BaseProduct
         }
         return $products;
     }
+
+    //список продуктів
+    public function getListProducts($limit=null)
+    {
+        $products = $this->getProducts(null,10);
+
+        $_p=array();
+        foreach($products as $k=>$p){
+            $_p[$k] = $p;
+            $_p[$k]['pictures'] = $p['pictures'][0];
+        }
+
+        return $_p;
+
+    }
 }
 
-//===================================================================
 /**
  * Клас для обробки зображень продуктів
  * Class ProductPictures
@@ -402,6 +415,7 @@ class ProductPictures
             $this->_dirs = $dirs;
         }
     }
+
     /**
      * @return array
      */
@@ -422,7 +436,7 @@ class ProductPictures
 
     /**
      * обєднуємо обидва масиви і переводимо в строку, для збереження в БД
-     * @param string $pictures_string
+     * @param array $pictures_string
      */
     function setPicturesString($pictures_string = array())
     {
@@ -478,7 +492,6 @@ class ProductPictures
 
     /**
      * дістати зображення із upload
-     *
      * @param array $pictures_added
      */
     function setPicturesAdded($pictures_added = array())
@@ -492,8 +505,9 @@ class ProductPictures
 
     /**
      * $galleryDir, array(productid, checkpictures, adapter)
-     *
+     * @param       $galleryDir
      * @param array $values
+     * @param array $dirs
      */
     function __construct($galleryDir, array $values, $dirs=array())
     {
@@ -568,33 +582,4 @@ class ProductPictures
             }
         }
     }
-
-    /**
-     * видалення заданих файлів
-     *
-     * @param array $files
-     * @param array $dirs : Видалення в тому числі і підфайлів
-     *
-     * @return bool
-     */
-    public static function deletePictures_in_Product($files, $dirs=array())
-    {
-        if (!$files) {
-            return false;
-        }
-
-        foreach($dirs as $dir)
-        {
-            foreach ($files as $key => $value) {
-                $file = "{$dir}/{$value}";
-
-                if (file_exists($file)) {
-                    unlink($file);
-                }
-            }
-        }
-
-        return true;
-    }
-
 }

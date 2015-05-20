@@ -1,2 +1,8 @@
-<h2><?php echo $this->translate('success'); ?></h2>
-<?php echo $this->translate(implode($this->messages)); ?>
+<h2><?= $this->translate('success'); ?></h2>
+<?= $this->translate(implode($this->messages)); ?>
+
+<p>
+    <a href="<?= $this->url(array(), 'gallery-index'); ?>">
+        <?= $this->translate('goto gallery'); ?>
+    </a>
+</p>

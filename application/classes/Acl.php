@@ -10,10 +10,7 @@ class Acl extends Zend_Acl
 {
     const ROLE_GUEST = 'guest';
     const ROLE_USER = 'user';
-//    const ROLE_PUBLISHER = 'publisher';
-//    const ROLE_EDITOR = 'editor';
     const ROLE_ADMIN = 'admin';
-//    const ROLE_GOD = 'god';
 
     protected static $_instance;
 
@@ -46,42 +43,38 @@ class Acl extends Zend_Acl
                  self::ROLE_ADMIN
             )
         );
-        //$this->allow(self::ROLE_ADMIN);
 
-        //чи можна в application.ini одразу задавати рівень доступу?
-        // parent resoures
-        $this->addResource('guest_allow');
-        $this->addResource('user_allow', 'guest_allow');
-        $this->addResource('admin_allow', 'user_allow');
+        //Ресурси
+        $this->addResource('index');
+        $this->addResource('gallery');
+        $this->addResource('product');
+        $this->addResource('blog');
+        $this->addResource('login');
+        $this->addResource('carousel');
 
-        // guest
-        $this->addResource('index/index', 'guest_allow');
-        $this->addResource('gallery/index', 'guest_allow');
-        $this->addResource('gallery/display', 'guest_allow');
-        $this->addResource('product/index', 'guest_allow');
-        $this->addResource('product/display', 'guest_allow');
-        $this->addResource('product/login', 'guest_allow');
+        //Дозволи
+        $this->allow(
+            self::ROLE_GUEST,
+            array('index', 'gallery', 'product', 'blog',),
+            array('index', 'display')
+        );
+        $this->allow(self::ROLE_GUEST, 'index', array('contacts'));
+        $this->allow(self::ROLE_GUEST, 'login', array('login'));
+        // user
 
-        // admin
+        $this->allow(self::ROLE_USER,
+            array('blog'),
+            array('comments')
+        );
+        $this->allow(self::ROLE_USER, 'login', array('logout', 'success'));
 
-        $this->addResource('carousel/index', 'admin_allow');
-        $this->addResource('carousel/create', 'admin_allow');
-        $this->addResource('carousel/update', 'admin_allow');
-        $this->addResource('carousel/delete', 'admin_allow');
-
-        $this->addResource('gallery/create', 'admin_allow');
-        $this->addResource('gallery/update', 'admin_allow');
-        $this->addResource('gallery/delete', 'admin_allow');
-
-        $this->addResource('product/create', 'admin_allow');
-        $this->addResource('product/update', 'admin_allow');
-        $this->addResource('product/delete', 'admin_allow');
-        /*****************************************************/
-
-        // permissions
-        $this->allow(self::ROLE_GUEST, array('guest_allow'));
-        $this->allow('user',  array('guest_allow', 'user_allow'));
-        $this->allow('admin', array('guest_allow', 'user_allow', 'admin_allow'));
+        //admin
+        $this->allow(self::ROLE_ADMIN); // allow admin access to all resources
+//        $this->allow(
+//            self::ROLE_ADMIN,
+//            array('gallery', 'product', 'blog', 'carousel'),
+//            array('create', 'update', 'delete', 'success', 'index')
+//        );
 
         return $this;
     }
@@ -93,19 +86,23 @@ class Acl extends Zend_Acl
      *
      * @return bool
      */
-    public function can($privilege = 'show')
+    public function can($privilege='')
     {
-        $resource = $this->getResource();
-        if (!$this->has($resource)) {
+        $params = $this->getParams();
+
+        if (!$this->has($params['resource'])) {
             return true;
         }
 
-        $role = $this->getRole(); //Acl::ROLE_GUEST;//
+        $role = $this->getCurrentRole(); //Acl::ROLE_GUEST;//
 
-        return $this->isAllowed($role, $resource, $privilege);
+        if (!$privilege)
+            $privilege = $params['privilege'];
+
+        return $this->isAllowed($role, $params['resource'], $privilege);
     }
 
-    public function getRole($role='')
+    public function getCurrentRole()
     {
         $auth = Zend_Auth::getInstance();
         $role = ($auth->hasIdentity() && !empty($auth->getIdentity()->role))
@@ -120,16 +117,24 @@ class Acl extends Zend_Acl
         return $role;
     }
 
-    public function getResource()
+//    public function getRole($role){
+//
+//    }
+
+    public function getParams()
     {
         $request = Zend_Controller_Front::getInstance();
-        $controller_ = $request->getRequest()->getParams();
-        $action_ = $request->getRequest()->getParams();
+        $_controller = $request->getRequest()->getParams();
+        $_action = $request->getRequest()->getParams();
 
-        $controller = $controller_['controller'];
-        $action = $action_['action'];
+        $resource = $_controller['controller'];
+        $privilege = $_action['action'];
 
-        return "{$controller}/{$action}";
+        return array(
+            'resource' => $resource,
+            'privilege' => $privilege
+        );
+        //return "{$controller}/{$action}";
     }
 
 }

@@ -1,24 +1,28 @@
-<div class="btn-group" role="group">
+<?php IF (Acl::getInstance()->getCurrentRole() == Acl::ROLE_ADMIN): ?>
 
-    <?php IF ($this->blogid): ?>
+    <div class="btn-group" role="group">
 
-        <?php $url_edit   = $this->url(array('id' => $this->blogid), 'blog-update'); ?>
-        <?php $url_delete = $this->url(array('id' => $this->blogid), 'blog-delete'); ?>
+        <?php IF ($this->blogid): ?>
 
-        <a class="btn btn-warning" href="<?= $url_edit; ?>" title="<?= $this->translate('blog-update'); ?>">
-            <span class="glyphicon glyphicon-pencil"></span><?= $this->translate('blog-update'); ?>
-        </a>
-        <a class="btn btn-danger" href="<?= $url_delete; ?>" title="<?= $this->translate('blog-delete'); ?>">
-            <span class="glyphicon glyphicon-remove"></span><?= $this->translate('blog-delete'); ?>
-        </a>
+            <?php $url_edit = $this->url(array('id' => $this->blogid), 'blog-update'); ?>
+            <?php $url_delete = $this->url(array('id' => $this->blogid), 'blog-delete'); ?>
 
-    <?php ELSE:?>
-        <?php $url_prod_create = $this->url(array(), 'blog-create'); ?>
+            <a class="btn btn-warning" href="<?= $url_edit; ?>" title="<?= $this->translate('blog-update'); ?>">
+                <span class="glyphicon glyphicon-pencil"></span><?= $this->translate('blog-update'); ?>
+            </a>
+            <a class="btn btn-danger" href="<?= $url_delete; ?>" title="<?= $this->translate('blog-delete'); ?>">
+                <span class="glyphicon glyphicon-remove"></span><?= $this->translate('blog-delete'); ?>
+            </a>
 
-        <a class="btn btn-danger" href="<?= $url_prod_create; ?>">
-            <?= $this->translate('blog-create'); ?>
-        </a>
+        <?php ELSE: ?>
+            <?php $url_prod_create = $this->url(array(), 'blog-create'); ?>
 
-    <?php ENDIF;?>
+            <a class="btn btn-danger" href="<?= $url_prod_create; ?>">
+                <?= $this->translate('blog-create'); ?>
+            </a>
 
-</div>
+        <?php ENDIF; ?>
+
+    </div>
+
+<?php ENDIF; ?>

@@ -1,0 +1,28 @@
+<?php IF(Acl::getInstance()->getCurrentRole()==Acl::ROLE_ADMIN): ?>
+
+    <div class="btn-group" role="group">
+
+        <?php IF ($this->carousel_id): ?>
+
+            <?php $url_edit   = $this->url(array('id' => $this->carousel_id), 'carousel-update'); ?>
+            <?php $url_delete = $this->url(array('id' => $this->carousel_id), 'carousel-delete'); ?>
+
+            <a class="btn btn-warning" href="<?= $url_edit; ?>" title="<?= $this->translate('carousel-update'); ?>">
+                <span class="glyphicon glyphicon-pencil"></span><?= $this->translate('carousel-update'); ?>
+            </a>
+            <a class="btn btn-danger" href="<?= $url_delete; ?>" title="<?= $this->translate('carousel-delete'); ?>">
+                <span class="glyphicon glyphicon-remove"></span><?= $this->translate('carousel-delete'); ?>
+            </a>
+
+        <?php ELSE:?>
+
+            <?php $url_create = $this->url(array('carousel' => $this->carousel_id), 'carousel-create'); ?>
+            <a class="btn btn-info" href="<?= $url_create; ?>">
+                <?= $this->translate('carousel-create'); ?>
+            </a>
+
+        <?php ENDIF;?>
+
+    </div>
+
+<?php ENDIF;?>

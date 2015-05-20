@@ -12,6 +12,50 @@
  */
 class Summers_Model_Gallery extends Summers_Model_BaseGallery
 {
+    protected  $_adapter;
+
+    protected $_files_for_delete;
+
+
+    /**
+     * Добавляємо файл для видалення
+     *
+     * @param array $file_for_delete
+     */
+    public function setFilesForDelete($files_for_delete)
+    {
+        if(!$files_for_delete) return;
+
+        if(!is_array($files_for_delete))
+            $files_for_delete = array($files_for_delete);
+
+        $this->_files_for_delete = $files_for_delete;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFilesForDelete()
+    {
+        return $this->_files_for_delete;
+    }
+
+    /**
+     * @param null $adapter
+     */
+    public function setAdapter($adapter)
+    {
+        $this->_adapter = $adapter;
+    }
+
+    /**
+     * @return null
+     */
+    public function getAdapter()
+    {
+        return $this->_adapter;
+    }
+
     public function setUp()
     {
         $this->hasMany(
@@ -102,11 +146,40 @@ class Summers_Model_Gallery extends Summers_Model_BaseGallery
         return $this->setGallery($values, $pic_adapter);
     }
 
+    public function save(Doctrine_Connection $conn = null)
+    {
+        if($this->getAdapter()) {
+            $new_fn = Summers_Snenko::SaveFileWithRandomName(
+                $this->getAdapter(),
+                Summers_Snenko::getNewFileName().".".pathinfo($this->picture, PATHINFO_EXTENSION),
+                $this->picture);
+
+            if (!$new_fn) {
+                $this->getErrorStack()->add('picture', 'general');
+                return;
+                //throw new Zend_Controller_Action_Exception("Picture is not be saved.");
+            }
+            $this->picture = $new_fn;
+        }
+
+        parent::save($conn);
+
+        // якщо немає помилок при збереженні: видаляємо зображення, що було до оновлення
+        if($files_for_delete = $this->getFilesForDelete()) {
+            if (!$this->getErrorStack()->toArray()) {
+                foreach($files_for_delete as $file)
+                    Summers_Snenko::deletePictures($file);
+            }
+        }
+    }
+
     public function setGallery($values, $adapter)
     {
         $item = ($values['galleryid'])
             ? Doctrine::getTable('Summers_Model_Gallery')->find($values['galleryid'])
             : $this;
+
+        $item->setAdapter($adapter);
 
         $item->fromArray(
             array(
@@ -114,26 +187,11 @@ class Summers_Model_Gallery extends Summers_Model_BaseGallery
                  'description' => $values['description'],
                  'meta'        => $values['meta'])
         );
-
         $item->save();
+
+
+
         $id = $item->galleryid;
-
-        $galleryDir = Zend_Registry::get('config')->uploads->galleryPhotoDir;
-        $old_fn = $values['picture'];
-
-        $gen = Summers_Snenko::getNewFileName($galleryDir);
-        $gen_fn = "{$gen}." . pathinfo($old_fn, PATHINFO_EXTENSION);
-
-        $new_fn = Summers_Snenko::
-            SaveFileWithRandomName(
-                $adapter, $gen_fn, $old_fn);
-
-        if (!$new_fn) {
-            throw new Zend_Controller_Action_Exception("Picture is not be saved.");
-        }
-
-        $item->picture = $new_fn;
-        $item->save();
 
         return $id;
 //        try {
@@ -178,7 +236,7 @@ class Summers_Model_Gallery extends Summers_Model_BaseGallery
 
         if ($gall['picture']) {
             //Якщо зображення видалено, то
-            $g = ProductPictures::deletePictures_in_Product(array($gall['picture']), $dirs);
+            $g = Summers_Snenko::deletePictures(array($gall['picture']), $dirs);
             if (!$g) {
                 return false;
             }

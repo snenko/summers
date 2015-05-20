@@ -28,25 +28,6 @@ class Summers_Model_Blog extends Summers_Model_BaseBlog
         }
     }
 
-    //$blogs = $this->db->query('SELECT * FROM blog ORDER BY blogid DESC')->fetchAll();
-
-    /**
-     * Зберігає новий запис блога
-     * @param $values
-     */
-//    public function setBlog($values)
-//    {
-//        if(!$values){
-//            $this->errorStack()->add('values is null in setBlog');
-//            return;
-//        }
-//
-//        $this->fromArray($values);
-//        //потім це треба виправити
-//
-//        $this->save();
-//    }
-
     public function setBlog_byId($id)
     {
         $value = $this::getBlog_byId($id);
@@ -116,18 +97,14 @@ class Summers_Model_Blog extends Summers_Model_BaseBlog
         return $q->fetchArray();
     }
 
-    /**
-     * get blog's model class for edit|update
-     * @param $id
-     *
-     * @return mixed|Summers_Model_Blog
-     */
-//    public static function getSummers_Model_Blog($id)
-//    {
-//        $item = ($id)
-//            ? Doctrine::getTable('Summers_Model_Blog')->find($id)
-//            : new Summers_Model_Blog();
-//
-//        return $item;
-//    }
+    public function getLastArticles($limit) {
+        $idFieldName = Doctrine_Core::getTable('Summers_Model_Blog')->getIdentifier();//blogid
+
+        $q = Doctrine_Query::create()
+            ->from('Summers_Model_Blog b')
+            ->orderBy('b.'.$idFieldName.' DESC')
+            ->limit($limit);
+        //rreturn $q->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
+        return $q->fetchArray();
+    }
 }

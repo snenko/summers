@@ -1,2 +1,6 @@
-<h2>Success</h2>
-<?php echo implode($this->messages); ?>
+<h2><?php echo $this->translate('success') ?> </h2>
+<p>
+    <a href="<a href="<?php echo $this->url(array(), 'home'); ?>">
+        <?= $this->translate('goto home page'); ?>
+    </a>
+</p>

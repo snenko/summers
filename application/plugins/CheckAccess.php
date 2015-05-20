@@ -19,8 +19,8 @@ class CheckAccess extends Zend_Controller_Plugin_Abstract
                 ->setControllerName('error')
                 ->setActionName('denied')
                 ->setParam('message', 'You don`t have access to this page')
-                ->setParam('role', $acl->getRole())
-                ->setParam('resource', $acl->getResource());
+                ->setParam('role', $acl->getCurrentRole())
+                ->setParam('resource', $acl->getParams());
         }
     }
 }

@@ -1,0 +1,18 @@
+<?php IF (count($this->articles)): ?>
+
+    <?= $this->translate('Last articles') ?>
+    <ul>
+        <?php foreach ($this->articles as $k => $v): ?>
+            <li class="carousel-caption">
+                <!--                    <div class="carousel-caption">-->
+<!--                <h4 id="first-slide-label">-->
+
+                    <a href="<?= $this->url(array('id' => $v['blogid']), 'blog-display', true); ?>">
+                        <?= $v['title'] ?>
+                    </a>
+<!--                </h4>-->
+            </li>
+        <?php endforeach; ?>
+    </ul>
+
+<?php ENDIF; ?>

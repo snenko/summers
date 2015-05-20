@@ -1,0 +1,17 @@
+<?php if ($this->carousels > 0): ?>
+    <table class="table table-hover">
+        <!--заголовок-->
+        <?= $this->partial('/carousel/row/carousel-tr.phtml', array('ishead' => true)); ?>
+        <?php foreach ($this->carousels as $k => $p): ?>
+
+            <!--рядок carousel-->
+            <?php $p['num'] = $k + 1; ?>
+            <?= $this->partial('/carousel/row/carousel-tr.phtml', array('carousel' => $p)); ?>
+
+        <?php endforeach; ?>
+    </table>
+<?php else: ?>
+
+    <p><?php echo $this->translate('not have products'); ?></p>
+
+<?php endif; ?>

@@ -4,12 +4,14 @@ class LoginController extends Zend_Controller_Action
 
     public function init()
     {
-        $this->view->doctype('XHTML1_STRICT');
-        //$this->_helper->layout->setLayout('admin');
+//        //$this->view->doctype('XHTML1_STRICT');
+//        //$this->_helper->layout->setLayout('admin');
     }
 
     public function loginAction()
     {
+        //$this->_redirect('/login/success');
+        //$this->_redirect('home');
         $form = new Summers_Form_Login;
 
         if ($this->getRequest()->isPost()) {
@@ -36,11 +38,15 @@ class LoginController extends Zend_Controller_Action
                     );
 //                  $user = new Summers_Model_DbTable_User();
                     //$storege_data->status = Acl::ROLE_GUEST;
-                    $storege_data->role = Acl::ROLE_GUEST;
+                    //$storege_data->role = ($storege_data->role)?$storege_data->Role:Acl::ROLE_GUEST;
+                    if(!$storege_data->role)
+                        $storege_data->role = Acl::ROLE_GUEST;
+
                     $storage->write($storege_data);
 
-                    $this->_helper->getHelper('FlashMessenger')->addMessage('You were successfully logged in.');
-                    $this->_redirect('/login/success');
+                    //$this->_helper->getHelper('FlashMessenger')->addMessage('You were successfully logged in.');
+                    $this->redirect('/login/success');
+                    return;
                 }
             }
         }
@@ -65,10 +71,3 @@ class LoginController extends Zend_Controller_Action
     }
 
 }
-
-
-
-
-
-
-

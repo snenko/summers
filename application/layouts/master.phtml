@@ -35,18 +35,20 @@
     ?>
 </head>
 <body>
-<div class="container">
+<?= $this->partial('master/header.phtml', array('isadmin'=>$this->isadmin)); ?>
+<div class="container bs-docs-container">
 
     <!-- row 1: navigation -->
-    <?= $this->partial('master/header.phtml', array('isadmin'=>$this->isadmin)); ?>
+
     <!-- Breadcrumbs -->
 
     <!-- row 2: content -->
     <?= $this->layout()->content; ?>
 
     <!-- row 3: footer -->
-    <?= $this->partial('master/footer.phtml'); ?>
+
 </div>
+<?= $this->partial('master/footer.phtml'); ?>
 <!-- javascript -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

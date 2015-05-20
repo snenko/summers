@@ -37,25 +37,3 @@ class Summers_Form_Element_Picture extends Zend_Form_Element_File
 
     }
 }
-//array('Count', false, array('min'=>1, 'max'=>3)),
-//            ->addFilter('Rename',
-//                Summers_Snenko::getNewFileName(Zend_Registry::get('config')->uploads->galleryPhotoDir)
-//            );
-
-//поствавити автоперейменовувач
-//->addFilter('Rename', implode('_',
-//        array($this->_user_id,
-//              $this->_upload_category,
-//              date('YmdHis'))))
-
-
-//----------------------------------------------------
-
-//->addFilter(
-//    new Filters_File_Resize(array(
-//                                 'width'     => 800,
-//                                 'height'    => 600,
-//                                 'keepRatio' => true,
-//                                 'directory' => 'c:/tmp/'//Zend_Registry::get('config')->paths->images->web
-//                            ))
-//);

@@ -1,1 +1,16 @@
-<?= $this->partial('/index/row/carusel.phtml', array('carousel' => $this->carousel['carousel'])); ?>
+<div class="row">
+    <div class="col-md-9" role="main">
+        <div class="bs-docs-section">
+            <?= $this->partial('/index/blocks/carusel.phtml', array('carousel' => $this->carousel['carousel'])); ?>
+        </div>
+    </div>
+    <div class="col-md-3" role="main">
+        <div class="bs-docs-section">
+            <?= $this->partial('/index/blocks/carousel-product.phtml', array('products' => $this->products) ); ?>
+        </div>
+        <div class="bs-docs-section" style="border: 1px solid red">
+            <?= $this->partial('/index/blocks/last-articles.phtml' ); ?>
+        </div>
+    </div>
+</div>
+

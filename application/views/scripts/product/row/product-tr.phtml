@@ -1,5 +1,18 @@
+<?php IF($this->ishead): ?>
+    <tr class="active">
+        <td><?= $this->translate('number'); ?></td>
+        <td><?= $this->translate('picture'); ?></td>
+        <td><?= $this->translate('name'); ?></td>
+        <td><?= $this->translate('description'); ?></td>
+        <td><?= $this->translate('galeries'); ?></td>
+    </tr>
+<?php ELSE: ?>
 <tr>
-    <td><?= $this->product['num-row']; ?></td>
+    <td>
+        <?= $this->partial('/product/row/product-admin-panel.phtml', array('productid' => $this->product['productid']));?>
+
+        <?= $this->product['num-row']; ?>
+    </td>
     <td>
         <a href="<?= $this->url(array('id' => $this->product['productid']), 'product-display'); ?>">
             <?= $this->escape($this->product['name']); ?>
@@ -18,8 +31,5 @@
         <?= $this->partial('/product/row/galleries.phtml', array('galleries' => $this->product['galleries']));?>
 
     </td>
-
-    <td>
-        <?= $this->partial('/product/row/product-admin-panel.phtml', array('productid' => $this->product['productid']));?>
-    </td>
 </tr>
+<?php ENDIF; ?>

@@ -1,0 +1,28 @@
+<?php IF($this->ishead): ?>
+    <tr class="active">
+        <td><?= $this->translate('№'); ?></td>
+        <td><?= $this->translate('title'); ?></td>
+        <td><?= $this->translate('picture'); ?></td>
+        <td><?= $this->translate('description'); ?></td>
+        <td><?= $this->translate('sort_order'); ?></td>
+        <td><?= $this->translate('admin-panel'); ?></td>
+    </tr>
+<?php ELSE: ?>
+    <tr>
+        <td><?= $this->carousel['num']; ?></td>
+        <td>
+            <?= $this->escape($this->carousel['title']); ?>
+        </td>
+        <td>
+            <?php $thumbnails = Zend_Registry::get('config')->thumbnails->dir; ?>
+            <?php $picture = $this->carousel['picture']; ?>
+
+            <img class="thumbnail" src="<?= "{$thumbnails}/". $this->escape(trim($picture)); ?>"/>
+        </td>
+        <td><?= $this->escape($this->carousel['description']); ?></td>
+        <td><?= $this->escape($this->carousel['sort_order']); ?></td>
+        <td>
+            <?= $this->partial('/carousel/row/carousel-admin-panel.phtml', array('carousel_id' => $this->carousel['carousel_id']));?>
+        </td>
+    </tr>
+<?php ENDIF; ?>

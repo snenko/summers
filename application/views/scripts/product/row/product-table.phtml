@@ -1,14 +1,8 @@
 <?php if ($this->products > 0): ?>
     <table class="table table-hover">
         <!--заголовок-->
-        <tr class="active">
-            <td><?= $this->translate('number'); ?></td>
-            <td><?= $this->translate('picture'); ?></td>
-            <td><?= $this->translate('name'); ?></td>
-            <td><?= $this->translate('description'); ?></td>
-            <td><?= $this->translate('galeries'); ?></td>
-            <td><?= $this->translate('admin-panel'); ?></td>
-        </tr>
+        <?= $this->partial('/product/row/product-tr.phtml', array('ishead' => true)); ?>
+
         <?php foreach ($this->products as $k => $p): ?>
 
             <!--рядок товару-->

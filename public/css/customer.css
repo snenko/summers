@@ -1,4 +1,4 @@
-body { padding-top: 70px; }
+/*body { padding-top: 70px; }*/
 
 footer {
     padding: 2em 0;
@@ -13,3 +13,26 @@ footer {
     font-weight: bold;
     font-family: Georgia,serif;
 }
+
+p.nice-font{
+    color: yellow;
+}
+h1.nice-font a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/*коррекція*/
+.head-descr{margin-right: 0 !important;}
+
+/*#last-articles.bs-example:after {*/
+    /*position: absolute;*/
+    /*top: 15px;*/
+    /*left: 15px;*/
+    /*font-size: 12px;*/
+    /*font-weight: 700;*/
+    /*color: #959595;*/
+    /*text-transform: uppercase;*/
+    /*letter-spacing: 1px;*/
+    /*content: "Останні статті" !important;*/
+/*}*/

@@ -46,10 +46,13 @@ return array(
     'admin-panel'   => 'Адмінка',
     'add pictures:' => 'добавити зображення:',
 
+    'sort_order'    => 'Сортування',
+
     //--- blog ---
     'blog-status'=>'Виводити',
     'display-body'=>'Тіло',
     'Not active records'=>'Не активні записи',
+    'Last articles' => 'Останні статті',
 
     // ------------------------------------
     'Gallery has deleted' => 'Галерея видалена',
@@ -81,6 +84,9 @@ return array(
 
     //--------------------------------------
     'check pictures for delete:'    => 'Відмітьте зображення для видалення:',
+    'goto carousel' => 'Перейти до Каруселі',
+    'goto gallery' => 'Перейти до Галереї',
+    'goto products' => 'Перейти до Товарів',
 
     //--- Питання -------------------------
     'You are realy want to delete?' => 'Ви дійсно хочете видалити?',
