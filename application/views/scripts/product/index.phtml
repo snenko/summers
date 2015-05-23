@@ -1,7 +1,14 @@
-<div class="page-header">
-    <h2><?= $this->translate('product') ?></h2>
+<?= $this->partial('/section/jumbotron.phtml', array('title'=> $this->translate('Products'))); ?>
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <?= $this->partial('/product/row/product-admin-panel.phtml'); ?>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <?= $this->partial('/product/row/product-table.phtml', array('products' => $this->products)); ?>
+            </div>
+        </div>
+    </div>
 </div>
-<?= $this->partial('/product/row/product-admin-panel.phtml'); ?>
-
-<?= $this->partial('/product/row/product-table.phtml', array('products' => $this->products)); ?>
-

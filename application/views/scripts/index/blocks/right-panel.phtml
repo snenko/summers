@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">мій блог</h3>
+    </div>
+    <div class="panel-body">
+        <?= $this->partial('/index/blocks/last-articles.phtml', array('articles' => $this->articles)); ?>
+    </div>
+
+    <div class="panel-footer">
+        <a class="btn btn-outline btn-sm"
+           href="<?php echo $this->url(array(), 'blog'); ?>"
+           role="button">
+            <?= $this->translate('Learn more') ?>
+            <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>
+
+<div class="panel panel-default visible-md visible-lg">
+    <div class="panel-heading">
+        <h3 class="panel-title">мої уроки</h3>
+    </div>
+    <div class="panel-body">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item"
+                    frameborder="1"
+                    allowfullscreen="true"
+                    src="https://www.youtube.com/embed/UK12LI56ADs">
+            </iframe>
+        </div>
+    </div>
+</div>

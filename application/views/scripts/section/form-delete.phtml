@@ -2,13 +2,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Login</h2>
-
-                <div style="color:red; font-weight:bolder">
-                    <?php echo $this->message; ?>
-                </div>
+                <h3><?php echo $this->translate('You are realy want to delete?'); ?></h3>
+                <h4><?= $this->translate($this->caption) ?>: <?= $this->message; ?></h4>
                 <?php echo $this->form; ?>
             </div>
         </div>
     </div>
 </div>
+

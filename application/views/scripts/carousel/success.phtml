@@ -1,8 +1,5 @@
-<h2><?= $this->translate('success'); ?></h2>
-<?= $this->translate(implode($this->messages)); ?>
-
-<p>
-    <a href="<?= $this->url(array(), 'carousel'); ?>">
-        <?= $this->translate('goto carousel'); ?>
-    </a>
-</p>
+<?= $this->partial('section/success.phtml',
+    array('messages' => $this->messages,
+          'url'      => $this->url(array(), 'carousel'),
+          'gototext' => $this->translate('goto carousel')));
+?>

@@ -1,8 +1,8 @@
 <?php IF (count($this->products)): ?>
 
-    <div class="bs-example" data-example-id="last-articles">
+    <div class="bs-example bs-product" data-example-id="last-articles">
         <div id="carousel-product" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
+            <ol class="carousel-indicators hidden">
 
                 <?php FOREACH ($this->products as $key => $value): ?>
                     <?php $active = ($key == 0) ? 'active' : ''; ?>
@@ -23,15 +23,9 @@
                              src="<?= $picture ?>"
                              data-holder-rendered="true">
 
-                        <?php
-                        $url = (!$c['url'] && $c['productid'])
-                            ?
-                            $this->url(array('id' => $c['productid']), 'product-display')
-                            :
-                            $c['url'];
-                        ?>
+                        <?php $url = (!$c['url'] && $c['productid'])?$this->url(array('id' => $c['productid']), 'product-display'):$c['url']; ?>
 
-                        <div class="carousel-caption">
+                        <div class="carousel-caption hidden-lg hidden-md">
                             <a href="<?= $url ?>"><?= $c['name'] ?></a>
                         </div>
 

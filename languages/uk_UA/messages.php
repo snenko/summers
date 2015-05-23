@@ -3,24 +3,26 @@ return array(
 
     // --- logo ---------------------------
     'Helena Osokina' => 'Олена Осокіна',
+    'Summers' => 'Summers',
+    'sublogo' => 'Тут ви зможете підібрати до вашого стилю унікальну в свому роді річ. а також всілякі статі та все що повязані з бісероплетінням.',
 
-    //--- Меню ----------------------------
+    // Other
     'MENU'      => 'МЕНЮ',
-
     'home'      => 'Головна',
-    'blog'      => 'Блог',
-    'Blog'      => 'Блог',
-    'gallery'   => 'Галерея',
     'contacts'  => 'Контакти',
-    'product'   => 'Продукт',
-
-    'galleries' => 'Галереї',
-    'products'  => 'продукти',
-
-    'carousel' => 'Налаштування каруселі',
-
     'login' => 'Залогінитись',
     'logout'=>'Вийти з користувача',
+    'Learn more' => 'дізнатись більше',
+    'Read more >>' => 'Читати далі >>',
+    'display-note'        => 'Головне',
+    'display-body'=>'Тіло',
+    'Not active records'=>'Не активні записи',
+    'Last articles' => 'Останні статті',
+    'not have records'    => 'Записи відсутні',
+
+    // Попередження
+    'You are realy want to delete?' => 'Ви дійсно хочете видалити?',
+    'Access denied!' => 'Доступ закритий',
 
     //--- Кнопки --------------------------
     'delete'       => 'видалити',
@@ -28,71 +30,61 @@ return array(
     'cancel'       => 'відмінити',
     'save'         => 'зберегти',
     'success'      => 'успіх',
-
-    'picture'      => 'Зображення',
-    'pictures'     => 'Зображення',
-
     'meta'         => 'Meta-теги',
     'description'  => 'Опис',
-    'galleryname'  => 'Назва галереї',
     'name'         => 'Назва',
     'number'       => '№',
-
     'body'         => 'тіло',
     'title'        => 'Заголовок',
     'display-mark' => 'налаштування',
     'mark'         => 'мітка',
-
     'admin-panel'   => 'Адмінка',
-    'add pictures:' => 'добавити зображення:',
-
     'sort_order'    => 'Сортування',
 
-    //--- blog ---
-    'blog-status'=>'Виводити',
-    'display-body'=>'Тіло',
-    'Not active records'=>'Не активні записи',
-    'Last articles' => 'Останні статті',
-
-    // ------------------------------------
+    // Gallery
+    'gallery'   => 'Галерея',
+    'galleries' => 'Галереї',
+    'galleryname'  => 'Назва галереї',
     'Gallery has deleted' => 'Галерея видалена',
-    'Product has deleted' => 'Продукт видалений',
+    'Product has deleted' => 'Прикраса видалений',
     "Gallery '%value%' has deleted" => "Gallery '%value%' has deleted",
-
-    // ------------------------------------
+    'goto gallery' => 'Перейти до Галереї',
+    'display-galleries'   => 'Список галерей',
     'gallery-create'=>'Створити галерею',
     'gallery-update'=>'Редагувати галерею',
     'gallery-delete'=>'Видалити галерею',
 
-    'product-create'=>'Створити продукт',
-    'product-update'=>'Редагувати продукт',
-    'product-delete'=>'Видалити продукт',
+    // Product
+    'products'  => 'прикраси',
+    'Products'  => 'Прикраси',
+    'product'   => 'Прикраса',
+    'My products' => 'Мої прикраси',
+    'product-create'=>'Додати нову прикрасу',
+    'product-update'=>'Редагувати прикраса',
+    'product-delete'=>'Видалити прикраса',
+    'not have products'   => 'Вироби відсутні',
+    'goto products' => 'Перейти до Товарів',
 
+    // Blog
+    'blog'      => 'Блог',
+    'Blog'      => 'Блог',
+    'blog-status'=>'Виводити',
     'blog-create' => 'Створити статтю',
     'blog-update' => 'Редагувати статтю',
     'blog-delete' => 'Видалити статтю',
+    'link to blog' => 'Посилання на статтю в блозі',
+    'goto blogs' => 'перейти до блогів',
 
-    'not have products'   => 'Вироби відсутні',
-    'not have records'    => 'Записи відсутні',
-
-    'pictures for delete' => 'Зображення для видалення',
-    'display-galleries'   => 'Список галерей',
-    'display-note'        => 'Головне',
-
-    'link to blog' => 'Стаття про продукт',
-    'Read more >>' => 'Читати далі >>',
-
-    //--------------------------------------
-    'check pictures for delete:'    => 'Відмітьте зображення для видалення:',
+    //Carousel
     'goto carousel' => 'Перейти до Каруселі',
-    'goto gallery' => 'Перейти до Галереї',
-    'goto products' => 'Перейти до Товарів',
+    'carousel' => 'Налаштування каруселі',
 
-    //--- Питання -------------------------
-    'You are realy want to delete?' => 'Ви дійсно хочете видалити?',
-
-    //--- Error ---------------------------
-    'Access denied!' => 'Доступ закритий',
+    // picture
+    'pictures for delete' => 'Зображення для видалення',
+    'picture'      => 'Зображення',
+    'pictures'     => 'Зображення',
+    'add pictures:' => 'добавити зображення:',
+    'check pictures for delete:'    => 'Відмітьте зображення для видалення:',
 
     //"Maximum allowed width for image '%image%' should be '%max%' but '%value%' detected" =>
     //"Максимальна довжина, що дозволяється для зображення '%image%' має бути '%max%' але зафіксовано '%value%'",

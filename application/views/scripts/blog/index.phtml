@@ -7,16 +7,24 @@ $this->dojo()->enable()
     ->requireModule("dijit.layout.ContentPane")
 ?>
 
-<div class="page-header">
-    <h2><?= $this->translate('Blog') ?></h2>
+<?= $this->partial('/section/jumbotron.phtml', array('title'=> $this->translate('Blog'))); ?>
+
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <?= $this->partial('/blog/row/blog-admin-panel.phtml'); ?>
+                <?= $this->partial('/blog/row/blogs.phtml', array('blogs' => $this->blogs)); ?>
+            </div>
+        </div>
+        <?php IF(Acl::getInstance()->getCurrentRole() == Acl::ROLE_ADMIN): ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <?= $this->partial('/blog/row/blogs.phtml', array('blogs' => $this->blogs_status_none)); ?>
+                </div>
+            </div>
+        <?php ENDIF; ?>
+
+    </div>
 </div>
-
-<?= $this->partial('/blog/row/blog-admin-panel.phtml'); ?>
-<?= $this->partial('/blog/row/blogs.phtml', array('blogs' => $this->blogs)); ?>
-
-<!--adminka-->
-<div class="page-header">
-    <h2><?= $this->translate('Not active records') ?></h2>
-</div>
-
-<?= $this->partial('/blog/row/blogs.phtml', array('blogs' => $this->blogs_status_none)); ?>

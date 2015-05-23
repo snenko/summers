@@ -92,8 +92,11 @@ class Summers_Model_Product extends Summers_Model_BaseProduct
 
     public function getProducts($galleryid=null, $limit=null)
     {
+        $idFieldName = Doctrine_Core::getTable('Summers_Model_Product')->getIdentifier();//id
+
         $q = Doctrine_Query::create()
             ->select('p.*')
+            ->orderBy('p.'.$idFieldName.' DESC')
             ->from('Summers_Model_Product p');
 
         if ($galleryid) {
@@ -367,7 +370,7 @@ class Summers_Model_Product extends Summers_Model_BaseProduct
     //список продуктів
     public function getListProducts($limit=null)
     {
-        $products = $this->getProducts(null,10);
+        $products = $this->getProducts(null, $limit);
 
         $_p=array();
         foreach($products as $k=>$p){

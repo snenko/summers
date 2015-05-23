@@ -11,6 +11,20 @@
         <?= $this->partial('/blog/row/mask.phtml', array('mask' => $this->blog['mask'])); ?>
     </div>
     <div class="panel-footer">
-        <?= $this->dateFormat($this->blog['blogupdate'], 'dd MMM YYYY hh:mm'); ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <?= $this->dateFormat($this->blog['blogupdate'], 'dd MMM YYYY hh:mm'); ?>
+                </div>
+                <div class="col-md-3">
+                    <?php $url_blog_display = $this->url(array(), 'blog'); ?>
+                    <a class="btn btn-outline btn-sm pull-right" href="<?= $url_blog_display; ?>" role="button">
+                        <?= $this->translate('goto blogs') ?>
+                        <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>

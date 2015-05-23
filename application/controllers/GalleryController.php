@@ -113,7 +113,11 @@ class GalleryController extends Zend_Controller_Action
         if ($input->isValid()) {
 
             //$products = (new Summers_Model_Product)->getProducts($input->id);
-            $products = Summers_Model_Product::getProducts_ByGalleries($input->id);
+            //$products = Summers_Model_Product::getProducts_ByGalleries($input->id);
+            ///$this->view->products = (new Summers_Model_Product())->getListProducts(4);
+
+            $products = (new Summers_Model_Product)->getProducts($input->id);// ::get get ::getProducts_ByGalleries($input->id);
+
             $gallery = (new Summers_Model_Gallery)->getGallery($input->id);
             $this->view->headTitle($gallery[0]['galleryname']);
 

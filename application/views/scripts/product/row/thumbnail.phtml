@@ -1,0 +1,15 @@
+<?php IF($this->product): ?>
+
+    <?php $url= $this->url(array('id' => $this->product['productid']), 'product-display'); ?>
+
+    <div class="caption text-center">
+        <a  class="thumbnail" href="<?= $url ?>">
+            <img src="<?= $this->escape($this->product['picture']) ?>">
+            <div class="caption"><h4><?= $this->escape($this->product['name'])?></h4></div>
+        </a>
+    </div>
+
+    <?= $this->partial('/product/row/product-admin-panel.phtml', array('productid' => $this->product['productid']));?>
+
+<?php ENDIF; ?>
+

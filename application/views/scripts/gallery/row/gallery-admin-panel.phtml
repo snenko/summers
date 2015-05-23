@@ -1,6 +1,8 @@
 <?php IF(Acl::getInstance()->getCurrentRole()==Acl::ROLE_ADMIN): ?>
-
+    <div class="row">
+        <div class="col-md-12">
 <div class="btn-group" role="group">
+
 
     <?php IF ($this->galleryid): ?>
 
@@ -30,5 +32,6 @@
     <?php ENDIF; ?>
 
 </div>
-
+    </div>
+</div>
 <?php ENDIF; ?>

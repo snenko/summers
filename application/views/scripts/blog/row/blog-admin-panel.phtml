@@ -1,4 +1,7 @@
 <?php IF (Acl::getInstance()->getCurrentRole() == Acl::ROLE_ADMIN): ?>
+    <div class="page-header">
+        <h2><?= $this->translate('Not active records') ?></h2>
+    </div>
 
     <div class="btn-group" role="group">
 

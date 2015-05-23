@@ -1,30 +1,29 @@
-<div class="page-header">
-    <h2><?= $this->escape($this->gallery['galleryname']) ?></h2>
-</div>
+<?= $this->partial('/section/jumbotron.phtml', array('title'=>$this->escape($this->gallery['galleryname']))); ?>
 
+<div class="section">
+    <div class="container">
+        <div class="row">
+<!--            <div class="col-md-4 hidden-xs">-->
 
-<!--заголовок галереї+опис+зображення-->
-<div>
-    <?=
-    $this->partial(
-        '/gallery/row/gallery-admin-panel.phtml',
-        array('galleryid' => $this->gallery['galleryid'])
-    );
-    ?>
-    <div class="caption">
-        <?php $picture = "/photos/md/" . $this->escape($this->gallery['picture']); ?>
+               <!--    gallery descr-->
+<?//= $this->partial('/gallery/row/display.phtml', array('gallery' => $this->gallery)); ?>
+<?//=$this->partial( '/gallery/row/gallery-admin-panel.phtml', array('galleryid' => $this->gallery['galleryid']));?>
 
-        <img class="img-thumbnail"
-             alt="<?= $this->escape($this->gallery['description']); ?>"
-             src="<?= $picture; ?>">
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+            <div class="col-md-12">
 
-        <p>
-            <?= $this->escape($this->gallery['description']); ?>
-        </p>
+                <?= $this->partial('/product/row/product-admin-panel.phtml');?>
+                <!--    products-->
+                <?= $this->partial('/gallery/row/thumbnail-products.phtml', array('products' => $this->products)); ?>
+
+            </div>
+        </div>
     </div>
-
 </div>
 
-<!--    products-->
-<?= $this->partial('/product/row/product-table.phtml', array('products' => $this->products)); ?>
+
+
+
+
 

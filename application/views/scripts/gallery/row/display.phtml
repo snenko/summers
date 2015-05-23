@@ -1,0 +1,17 @@
+<?php IF($this->gallery): ?>
+    <?php $dir = Summers_Snenko::getPhotoMdDir(); ?>
+    <?php $picture = $dir . "/" . $this->escape($this->gallery['picture']); ?>
+
+    <div class="row">
+
+        <div class="col-sm-6 col-md-12">
+            <img src="<?= $picture ?>" class="center-block img-responsive img-rounded">
+        </div>
+
+        <div class="col-sm-6 col-md-12">
+            <p><?= $this->escape($this->gallery['description']) ?></p>
+        </div>
+
+    </div>
+
+<?php ENDIF; ?>

@@ -1,0 +1,22 @@
+<?php IF ($this->products): ?>
+
+    <div class="row">
+
+        <?php $dir = Summers_Snenko::getPhotoMdDir(); ?>
+
+        <?php FOREACH ($this->products as $key => $p): ?>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+
+                <?php $p['picture'] = $dir . "/" . $this->escape($p['pictures']); ?>
+
+                <?= $this->partial('/product/row/thumbnail.phtml', array('product' => $p)); ?>
+
+
+            </div>
+            <?= $this->partial('/index/bootstrap/clearfix.phtml', array('key' => $key)); ?>
+
+        <?php ENDFOREACH; ?>
+    </div>
+
+<?php ENDIF; ?>

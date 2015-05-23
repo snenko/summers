@@ -212,6 +212,16 @@ class Summers_Snenko
     {
         return Zend_Registry::get('config')->uploads->galleryPhotoDir;
     }
+
+    static function getPhotoMdDir()
+    {
+        return Zend_Registry::get('config')->md->dir;
+    }
+
+    static function getPhotoThumbnailsDir()
+    {
+        return Zend_Registry::get('config')->thumbnails->dir;
+    }
 }
 
 /**

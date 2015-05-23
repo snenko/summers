@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-    <home>
-        <label>home</label>
-        <uri>/home</uri>
-        <resource>index</resource>
-        <privilege>index</privilege>
-    </home>
+    <!--<home>-->
+        <!--<label>home</label>-->
+        <!--<uri>/home</uri>-->
+        <!--<resource>index</resource>-->
+        <!--<privilege>index</privilege>-->
+    <!--</home>-->
     <gallery>
         <label>gallery</label>
         <uri>/gallery</uri>
@@ -15,6 +15,7 @@
     <product>
         <label>product</label>
         <uri>/product</uri>
+        <resource>product</resource>
         <privilege>index</privilege>
     </product>
     <blog>
