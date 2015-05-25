@@ -1,18 +1,3 @@
 <header class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="glyphicon glyphicon-arrow-down"></span>
-            <?= $this->translate('MENU'); ?>
-        </button>
-
-        <a class="navbar-brand nice-font-dark"
-           href="<?php echo $this->url(array(), 'home'); ?>">
-            <?= $this->translate('Summers') ?>
-        </a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="collapse">
-        <?= $this->navigation()->menu()->setUlClass("nav navbar-nav"); ?>
-    </div>
+    <?= $this->navigation()->menu()->setPartial('navbar/menu-horizontal.phtml')->render(); ?>
 </header>

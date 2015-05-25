@@ -1,0 +1,17 @@
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="glyphicon glyphicon-arrow-down"></span>
+        <?= $this->translate('MENU'); ?>
+    </button>
+
+    <a class="navbar-brand nice-font-dark" href="<?php echo $this->url(array(), 'home'); ?>"> <?= $this->translate('logo') ?></a>
+</div>
+
+<div class="collapse navbar-collapse" id="collapse">
+    <ul class="nav navbar-nav">
+
+        <?= $this->partial('navbar/li.phtml', array('container' => $this->container,)); ?>
+
+    </ul>
+</div>

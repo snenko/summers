@@ -3,7 +3,6 @@
     <?php if ($this->pictures > 0): ?>
 
         <?php foreach ($this->pictures as $picture): ?>
-
             <div class="caption col-md-3">
 
                 <?php $dir = Zend_Registry::get('config')->md->dir; ?>
@@ -14,11 +13,12 @@
         <?php endforeach; ?>
 
     <?php else: ?>
+        <div class="col-md-12">
+            <div class="well">
+                <?php echo $this->translate('not have products'); ?>
+            </div>
 
-        <p>
-            <?php echo $this->translate('not have products'); ?>
-        </p>
-
+        </div>
     <?php endif; ?>
 
-    <div/>
+</div>

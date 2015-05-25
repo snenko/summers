@@ -8,6 +8,18 @@
 
 class Summers_Snenko
 {
+    static function getLanguages() {
+        $lang = array(
+            'uk_UA'=>'українська',
+            'ru_RU'=>'русский',
+            'en_US'=>'english'
+        );
+
+
+//        $lang
+        return $lang;
+    }
+
     static function getCurrentDate()
     {
         return date('Y-m-d H:i:s', mktime());
@@ -192,6 +204,8 @@ class Summers_Snenko
         return $filter->filter("{$dir}/{$fn}");
     }
 
+    // шляхи до файлів
+
     /**
      * Повертає массив папок шляхів до зображень
      * @return mixed
@@ -221,6 +235,61 @@ class Summers_Snenko
     static function getPhotoThumbnailsDir()
     {
         return Zend_Registry::get('config')->thumbnails->dir;
+    }
+
+    /**
+     * get path to settings file
+     * @return mixed
+     */
+
+    static function getSetting_path(){
+        return Zend_Registry::get('config')->configs->localConfigPath;
+    }
+
+    static function getSettings_config()
+    {
+        $configs = Zend_Registry::get('config')->configs->localConfigPath;
+        //$i = new Zend_Config_Ini($configs['localConfigPath']);
+        $i = new Zend_Config_Ini($configs);
+        return $i;
+    }
+
+    // settings
+
+    /**
+     * get admin's settings
+     * logExceptionsToFile, itemsPerPage, adminEmailAddress
+     * @return mixed
+     */
+    static function getSettings_admin()
+    {
+        //дізнаємось конфігурацію файла
+        $configs = self::getSettings_config();
+        return $configs->admin;
+    }
+
+    /**
+     * get guest's settings
+     * guestEmailAddress, displaySellerInfo
+     * @return mixed
+     */
+    static function getSettings_guest()
+    {
+        //дізнаємось конфігурацію файла
+        $configs = self::getSettings_config();
+        return $configs->guest;
+    }
+
+    /**
+     * get user's settings
+     * guestEmailAddress, displaySellerInfo
+     * @return mixed
+     */
+    static function getSettings_user()
+    {
+        //дізнаємось конфігурацію файла
+        $configs = self::getSettings_config();
+        return $configs->user;
     }
 }
 

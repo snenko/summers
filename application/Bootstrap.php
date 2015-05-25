@@ -36,7 +36,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $locale = null;
 
-        $session = new Zend_Session_Namespace('square.l10n');
+        $session = new Zend_Session_Namespace('summers.l10n');
         if ($session->locale) {
             $locale = new Zend_Locale($session->locale);
         }
@@ -45,20 +45,49 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             try {
                 $locale = new Zend_Locale('browser');
             } catch (Zend_Locale_Exception $e) {
-                $locale = new Zend_Locale('uk_UA');
+
+                $locale = new Zend_Locale(
+                    Summers_Snenko::getSettings_guest()->langDefault);//'uk_UA'
             }
         }
 
-        $registry = Zend_Registry::getInstance();
-        $registry->set('Zend_Locale', $locale);
+        Zend_Registry::getInstance()->set('Zend_Locale', $locale);
+//        $registry = Zend_Registry::getInstance();
+//        $registry->set('Zend_Locale', $locale);
     }
 
     protected function _initTranslate()
     {
-        $translate = new Zend_Translate('array', APPLICATION_PATH . '/../languages/',
-            null, array('scan' => Zend_Translate::LOCALE_FILENAME, 'disableNotices' => 1));
-        $registry = Zend_Registry::getInstance();
-        $registry->set('Zend_Translate', $translate);
+        $translate = null;
+
+        $translate = new Zend_Translate(
+            'array',
+            APPLICATION_PATH . '/../languages/',
+            null,
+            array(
+                 'scan' => Zend_Translate::LOCALE_DIRECTORY,// Zend_Translate::LOCALE_FILENAME,
+                 'disableNotices' => 1));
+//        $registry = Zend_Registry::getInstance();
+//        $registry->set('Zend_Translate', $translate);
+
+        //------------------------------------------------------------
+//        $translate = new Zend_Translate(
+//            'array',
+//            APPLICATION_PATH . '/../languages/',
+//            null,
+//            array('scan' => Zend_Translate::LOCALE_FILENAME, 'disableNotices' => 1)
+//        );
+        //============================================================
+
+//        $translator1 = new Zend_Translate(
+//            array(
+//                 "adapter" => "array",
+//                 "content" => APPLICATION_PATH . "/../languages",
+//                 "locale"  => "uk",
+//                 "scan"    => Zend_Translate::LOCALE_DIRECTORY
+//            ));
+
+        Zend_Registry::getInstance()->set('Zend_Translate', $translate);
     }
 
     protected function _initDojo()
@@ -108,8 +137,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initNavigation()
     {
-        //read XML with navigation information and initializes it
-        $db = Zend_Db_Table::getDefaultAdapter();
+//        $db = Zend_Db_Table::getDefaultAdapter();
         $navigation_config = new Zend_Config_Xml(APPLICATION_PATH . '/configs/navigation.xml');
         $conteiner = new Zend_Navigation($navigation_config);
 

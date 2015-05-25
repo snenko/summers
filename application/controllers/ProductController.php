@@ -13,7 +13,7 @@ class ProductController extends Zend_Controller_Action
         if ($this->_helper->getHelper('FlashMessenger')->getMessages()) {
             $this->view->messages = $this->_helper->getHelper('FlashMessenger')->getMessages();
         } else {
-            $this->_redirect('/');
+            $this->redirect('/');
         }
     }
 

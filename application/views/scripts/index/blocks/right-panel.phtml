@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">мій блог</h3>
+        <h3 class="panel-title"><?= $this->translate('my blog') ?></h3>
     </div>
     <div class="panel-body">
         <?= $this->partial('/index/blocks/last-articles.phtml', array('articles' => $this->articles)); ?>
@@ -18,7 +18,7 @@
 
 <div class="panel panel-default visible-md visible-lg">
     <div class="panel-heading">
-        <h3 class="panel-title">мої уроки</h3>
+        <h3 class="panel-title"><?= $this->translate('my lessons') ?></h3>
     </div>
     <div class="panel-body">
         <div class="embed-responsive embed-responsive-16by9">

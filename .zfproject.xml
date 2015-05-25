@@ -56,6 +56,11 @@
         </controllerFile>
         <controllerFile controllerName="Settings">
           <actionMethod actionName="index"/>
+          <actionMethod actionName="update"/>
+          <actionMethod actionName="success"/>
+        </controllerFile>
+        <controllerFile controllerName="Locale">
+          <actionMethod actionName="index"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
@@ -162,6 +167,15 @@
             <viewScriptFile forActionName="denied"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Settings">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Settings">
+            <viewScriptFile forActionName="update"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Settings">
+            <viewScriptFile forActionName="success"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Locale">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
