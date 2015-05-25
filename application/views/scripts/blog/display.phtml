@@ -1,7 +1,7 @@
 <?php $this->dojo()->enable()->setDjConfigOption('parseOnLoad', true)->requireModule("dijit.layout.AccordianContainer")->requireModule("dijit.layout.ContentPane");?>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h2><?= $this->blog['title']; ?></h2>
+        <h2 class="panel-title"><?= $this->blog['title']; ?></h2>
     </div>
     <div class="panel-body">
         <?= $this->partial('/blog/row/blog-admin-panel.phtml', array('blogid' => $this->blog['blogid'])); ?>
