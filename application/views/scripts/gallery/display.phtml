@@ -3,18 +3,11 @@
 <div class="section">
     <div class="container">
         <div class="row">
-<!--            <div class="col-md-4 hidden-xs">-->
 
-               <!--    gallery descr-->
-<?//= $this->partial('/gallery/row/display.phtml', array('gallery' => $this->gallery)); ?>
-<?//=$this->partial( '/gallery/row/gallery-admin-panel.phtml', array('galleryid' => $this->gallery['galleryid']));?>
-
-<!--            </div>-->
-<!--            <div class="col-md-8">-->
             <div class="col-md-12">
 
                 <?= $this->partial('/product/row/product-admin-panel.phtml');?>
-                <!--    products-->
+
                 <?= $this->partial('/gallery/row/thumbnail-products.phtml', array('products' => $this->products)); ?>
 
             </div>

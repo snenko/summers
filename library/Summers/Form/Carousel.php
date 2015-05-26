@@ -22,7 +22,7 @@ class Summers_Form_Carousel extends Summers_Form_Standart
             ->addFilter('HtmlEntities')
             ->addFilter('StringTrim')
             ->addFilter('StringToUpper');
-        foreach ($this->getProducts() as $v) {
+        foreach ((new Summers_Model_Product())->getProducts() as $v) {
             $productid->addMultiOption($v['productid'], $v['name']);
         }
         $productid->addMultiOption('', '-');
@@ -70,11 +70,5 @@ class Summers_Form_Carousel extends Summers_Form_Standart
             ));
 
         parent::init();
-    }
-
-    function getProducts() {
-        $q = Doctrine_Query::create()
-            ->from('Summers_Model_Product c');
-        return $q->fetchArray();
     }
 }

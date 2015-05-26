@@ -60,21 +60,21 @@
         <pages>
             <lang1>
                 <label>українська</label>
-                <uri>locale/index/uk_UA</uri>
+                <uri>/locale/index/uk_UA</uri>
                 <ico>/img/locale/ua.png</ico>
                 <resource>locale</resource>
                 <privilege>index</privilege>
             </lang1>
             <lang2>
                 <label>русский</label>
-                <uri>locale/index/ru_RU</uri>
+                <uri>/locale/index/ru_RU</uri>
                 <ico>/img/locale/ru.png</ico>
                 <resource>locale</resource>
                 <privilege>index</privilege>
             </lang2>
             <lang3>
                 <label>english</label>
-                <uri>locale/index/en_US</uri>
+                <uri>/locale/index/en_US</uri>
                 <ico>/img/locale/en.png</ico>
                 <resource>locale</resource>
                 <privilege>index</privilege>

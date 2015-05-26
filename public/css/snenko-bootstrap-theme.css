@@ -181,3 +181,7 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
 .nav-pills>li>a {
     color: #87298A;
 }
+
+.carousel-caption a {
+    color: #fff;
+}

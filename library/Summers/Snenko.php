@@ -8,6 +8,44 @@
 
 class Summers_Snenko
 {
+
+    static function getImageSize() {
+        $imageSize = array(
+            'minwidth'  => 340,
+            'minheight' => 170,
+            'maxwidth'  => 2500,
+            'maxheight' => 2500
+        );
+        return $imageSize;
+    }
+
+    /**
+     * Генеруємо потрібний шлях до зображення
+     * @param       $file_name
+     * @param array $options = array(no-photo, dir, mask-dir=array(orig, md, thumbnail))
+     *
+     * @return string
+     */
+    static function img_src($file_name, $options=array())
+    {
+        $no_photo = ($options['no-photo'])?$options['no-photo']:'no-photo.png';
+        $dir = ($options['dir'])?$options['dir'] : Summers_Snenko::getPhotoMdDir();
+
+        switch ($options['mask-dir']) {
+            case 'orig':
+                $dir = Summers_Snenko::getPhotoDir();
+                break;
+            case 'md':
+                $dir = Summers_Snenko::getPhotoMdDir();
+                break;
+            case 'thumbnail':
+                $dir = Summers_Snenko::getPhotoThumbnailsDir();
+                break;
+        }
+
+        return $dir.'/'.(($file_name)?$file_name: $no_photo);
+    }
+
     static function getLanguages() {
         $lang = array(
             'uk_UA'=>'українська',
@@ -224,7 +262,7 @@ class Summers_Snenko
      */
     static function getPhotoDir()
     {
-        return Zend_Registry::get('config')->uploads->galleryPhotoDir;
+        return Zend_Registry::get('config')->photos->dir;
     }
 
     static function getPhotoMdDir()

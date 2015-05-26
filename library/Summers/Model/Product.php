@@ -90,27 +90,58 @@ class Summers_Model_Product extends Summers_Model_BaseProduct
         return $recs;
     }
 
-    public function getProducts($galleryid=null, $limit=null)
+    /**
+     * $galleryid=null, $limit=null
+     * @return mixed
+     */
+    /**
+     * @param array $options(galleryid, $limit, $products=array(), order_by)
+     *
+     * @return mixed
+     */
+    public function getProducts($options=array())
     {
-        $idFieldName = Doctrine_Core::getTable('Summers_Model_Product')->getIdentifier();//id
+        $limit=$options['limit'];
+        $galleryid=$options['galleryid'];
+        $products=$options['products'];
+
+        $order_by=($options['order_by'])?$options['order_by']: Doctrine_Core::getTable('Summers_Model_Product')->getIdentifier();
 
         $q = Doctrine_Query::create()
             ->select('p.*')
-            ->orderBy('p.'.$idFieldName.' DESC')
             ->from('Summers_Model_Product p');
+
+        if($order_by) {
+            $q->orderBy('p.'.$order_by.' DESC');
+        }
 
         if ($galleryid) {
             $q->leftJoin('Summers_Model_SubProductGallery s')
-                ->where('s.galleryid = ?', $galleryid);
+                ->addWhere('s.galleryid = ?', $galleryid);
+        }
+
+        if ($products) {
+            $q->whereIn('p.productid', $products);
         }
 
         if ($limit) {
             $q->limit($limit);
         }
+        $products = $q->fetchArray();
 
-        $res = $this->deployPicturesToArray($q->fetchArray(), true);
+        $all_galleries = Summers_Model_Gallery::getGalleries_toArray();
 
-        return $res;
+        foreach($products as $k=>$v)
+        {
+            // добавити перелік галерей
+            $galleries = Summers_Model_SubProductGallery::getGalleriesFromProduct($v['productid'], $all_galleries);
+            // рядок список Фото, в массив
+            $pictures = Summers_Snenko::getArray($v['pictures']);
+
+            $products[$k]['pictures'] = $pictures;
+            $products[$k]['galleries'] = $galleries;
+        }
+        return $products;
     }
 
     //public function setProductAdapterForm($form)
@@ -311,76 +342,80 @@ class Summers_Model_Product extends Summers_Model_BaseProduct
         return $res;
 
     }
+//    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+//    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 
     /**
      * Отримати колекцію продуктів
      * @param null $galleryid
      *
      * @return array
-     */
-    public static function getProducts_ByGalleries($galleryid=null)
-    {
-        //вибірка товарів
-        $q = Doctrine_Query::create()
-            ->select('p.*')
-            ->from('Summers_Model_Product p')
-            ->orderBy('p.name');
+//     */
+//    public static function getProducts_ByGalleries($galleryid=null)
+//    {//!!!!!!!!
+//        //вибірка товарів
+//        $q = Doctrine_Query::create()
+//            ->select('p.*')
+//            ->from('Summers_Model_Product p')
+//            ->orderBy('p.name');
+//
+//        if($galleryid){
+//            $q->leftJoin('p.Summers_Model_SubProductGallery pg')
+//                ->addWhere('pg.galleryid = ?', $galleryid);
+//        }
+//
+//        $recs = $q->fetchArray();
+//
+//        //вибірка галерей
+//        $all_galleries = Summers_Model_Gallery::getGalleries_toArray();
+//        $products = array();
+//
+//        //Вибірка шляхів
+//        $dir = Zend_Registry::get('config')->thumbnails->dir;
+//        //$galleryDir = Zend_Registry::get('config')->uploads->galleryPhotoDir;
+//
+//        foreach($recs as $rec)
+//        {
+//            // добавити перелік галерей
+//            $galleries = Summers_Model_SubProductGallery::
+//                getGalleriesFromProduct($rec['productid'], $all_galleries);
+//
+//            // Фото товару
+//            $picture = Summers_Model_Product::getPictures($rec['productid'], true);
+//            if(!$picture){
+//                $picture = 'no-photo.png';
+//            }
+//
+//            // заносимо данні в основний масив
+//            $products[] = array(
+//                'productid'   => $rec['productid'],
+//                'name'        => $rec['name'],
+//                'meta'        => $rec['meta'],
+//                'description' => $rec['description'],
+//                'picture'     => "{$dir}/{$picture}",
+//                'galleries'   => $galleries,
+//            );
+//
+//        }
+//        return $products;
+//    }
 
-        if($galleryid){
-            $q->leftJoin('p.Summers_Model_SubProductGallery pg')
-                ->addWhere('pg.galleryid = ?', $galleryid);
-        }
-
-        $recs = $q->fetchArray();
-
-        //вибірка галерей
-        $all_galleries = Summers_Model_Gallery::getGalleries_toArray();
-        $products = array();
-
-        //Вибірка шляхів
-        $dir = Zend_Registry::get('config')->thumbnails->dir;
-        //$galleryDir = Zend_Registry::get('config')->uploads->galleryPhotoDir;
-
-        foreach($recs as $rec)
-        {
-            // добавити перелік галерей
-            $galleries = Summers_Model_SubProductGallery::
-                getGalleriesFromProduct($rec['productid'], $all_galleries);
-
-            // Фото товару
-            $picture = Summers_Model_Product::getPictures($rec['productid'], true);
-            if(!$picture){
-                $picture = 'no-photo.png';
-            }
-
-            // заносимо данні в основний масив
-            $products[] = array(
-                'productid'   => $rec['productid'],
-                'name'        => $rec['name'],
-                'meta'        => $rec['meta'],
-                'description' => $rec['description'],
-                'picture'     => "{$dir}/{$picture}",
-                'galleries'   => $galleries,
-            );
-
-        }
-        return $products;
-    }
-
-    //список продуктів
-    public function getListProducts($limit=null)
-    {
-        $products = $this->getProducts(null, $limit);
-
-        $_p=array();
-        foreach($products as $k=>$p){
-            $_p[$k] = $p;
-            $_p[$k]['pictures'] = $p['pictures'][0];
-        }
-
-        return $_p;
-
-    }
+//    //список продуктів
+//    public function getListProducts($limit=null)
+//    {
+//        $products = $this->getProducts(array('limit'=>$limit));
+//
+//        $_p=array();
+//        foreach($products as $k=>$p){
+//            $_p[$k] = $p;
+//            $_p[$k]['pictures'] = $p['pictures'][0];
+//        }
+//
+//        return $_p;
+//
+//    }
 }
 
 /**

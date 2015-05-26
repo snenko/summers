@@ -1,24 +1,51 @@
-<div class="row">
+<?php
+//    $this->headScript()->headScript()->prependFile('/fancybox/jquery.fancybox-1.3.4.pack.js');
+//    $this->headLink()->appendStylesheet('/fancybox/jquery.fancybox-1.3.4.css');
 
-    <?php if ($this->pictures > 0): ?>
+    $this->headLink()->appendStylesheet('/fancybox/jquery.fancybox.css');
+?>
 
-        <?php foreach ($this->pictures as $picture): ?>
-            <div class="caption col-md-3">
+<style>
+    .thumb img {
+        filter: none; /* IE6-9 */
+        -webkit-filter: grayscale(0);
+        border-radius:5px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding:5px;
+    }
+    .thumb img:hover {
+        filter: gray; /* IE6-9 */
+        -webkit-filter: grayscale(1);
+    }
+    .thumb {
+        padding:5px;
+    }
+</style>
 
-                <?php $dir = Zend_Registry::get('config')->md->dir; ?>
-                <img class="img-thumbnail"  alt="" src="<?= "{$dir}/". $this->escape(trim($picture)); ?>">
+<?php FOREACH($this->pictures as $key=>$picture): ?>
 
-            </div>
+    <?php $fn_orig = Summers_Snenko::img_src($picture, array('mask-dir'=>'orig')); ?>
+    <?php $fn_md = Summers_Snenko::img_src($picture); ?>
 
-        <?php endforeach; ?>
-
-    <?php else: ?>
-        <div class="col-md-12">
-            <div class="well">
-                <?php echo $this->translate('not have products'); ?>
-            </div>
-
+        <div class="col-md-4 col-sm-6 col-xs-12 thumb">
+            <a class="fancyimage" rel="group" href="<?= $fn_orig ?>">
+                <img class="img-responsive" src="<?= $fn_md ?>" />
+            </a>
         </div>
-    <?php endif; ?>
 
-</div>
+<!--    --><?//= $this->partial('/bootstrap/clearfix3.phtml', array('key' => $key)); ?>
+<!--    --><?//= $this->partial('/bootstrap/clearfix3.phtml', array('key' => $key)); ?>
+
+<?php ENDFOREACH;?>
+
+<script src="/js/jquery/jquery-1.11.2.min.js"></script>
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>-->
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+//    $(document).ready(function() {
+        $("a.fancyimage").fancybox();
+//    });
+</script>
+
+

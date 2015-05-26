@@ -1,25 +1,92 @@
-<?= $this->partial('/section/jumbotron.phtml', array('title'=> $this->escape($this->product['name']))); ?>
+<?//= $this->partial('/section/jumbotron.phtml', array('title'=> $this->escape($this->product['name']))); ?>
 
-<div class="section">
+<!--<div class="section">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                --><?//= $this->partial('/product/row/product-admin-panel.phtml'); ?>
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <p>--><?//= $this->escape($this->product['description']); ?><!--</p>-->
+<!--                --><?//= $this->partial('/product/row/product-url.phtml', array('url' => $this->product['url'])); ?>
+<!--                <hr/>-->
+                <!--photos-->
+<!--                --><?//= $this->partial('/product/row/pictures.phtml', array('pictures' => $this->product['pictures'])); ?>
+
+                <!--galleries-->
+<!--                --><?//= $this->partial('/product/row/galleries.phtml', array('galleries' => $this->product['gallerys']));?>
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<hr>-->
+<!--<div class="well snenko-color">-->
+<!--    <h1>--><?//= $this->escape($this->product['name']) ?><!--</h1>-->
+<!--</div>-->
+
+<section>
     <div class="container">
+
+        <!--head-->
         <div class="row">
             <div class="col-md-12">
-                <?= $this->partial('/product/row/product-admin-panel.phtml'); ?>
+                <div class="page-header">
+                    <h1 class="nice-font-dark"><?= $this->escape($this->product['name']) ?></h1>
+                </div>
             </div>
         </div>
+
+        <!--bye-->
         <div class="row">
             <div class="col-md-12">
 
-                <p><?= $this->escape($this->product['description']); ?></p>
-                <?= $this->partial('/product/row/product-url.phtml', array('url' => $this->product['url'])); ?>
-                <hr/>
-                <!--        photos-->
-                <?= $this->partial('/product/row/pictures.phtml', array('pictures' => $this->product['pictures'])); ?>
-                <hr/>
-                <!--        galleries-->
-                <?= $this->partial('/product/row/galleries.phtml', array('galleries' => $this->product['gallerys']));?>
+            </div>
+        </div>
+
+        <!--body-->
+        <div class="row">
+
+            <!--pictures-->
+            <div class="col-md-6 col-lg-6">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <?= $this->partial('/product/row/pictures.phtml', array('pictures' => $this->product['pictures'])); ?>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!--right panel-->
+            <div class="col-md-6 col-lg-6">
+
+                <a class="btn btn-primary btn-block" href="#">
+                    <?= $this->translate('connect for bye'); ?>
+                </a>
+
+                <!--link-->
+                <?= $this->partial('/product/row/link.phtml', array('link' => $this->product['url'])); ?>
+
+                <!--description-->
+                <?= $this->partial('/product/row/description.phtml', array('description' => $this->product['description'])); ?>
+
+                <!--gallerys-->
+                <?php IF($this->product['galleries']): ?>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <?= $this->partial('/gallery/row/marks.phtml', array('galleries' => $this->product['galleries'])); ?>
+                        </div>
+                    </div>
+                <?php ENDIF; ?>
 
             </div>
         </div>
+
     </div>
-</div>
+</section>

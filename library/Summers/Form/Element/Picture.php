@@ -14,12 +14,7 @@ class Summers_Form_Element_Picture extends Zend_Form_Element_File
         $this->addValidator('Size', false, '2048000');
         $this->addValidator('Extension', false, 'jpg,png,gif');
         $this->addValidator(
-            'ImageSize', false, array(
-                                     'minwidth'  => 280,
-                                     'minheight' => 192,
-                                     'maxwidth'  => 1500,
-                                     'maxheight' => 1500
-                                )
+            'ImageSize', false, Summers_Snenko::getImageSize()
         );
 
         //$this->addPrefixPath('Summers_Form', 'Summers/Form');

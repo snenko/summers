@@ -1,0 +1,8 @@
+<?php FOREACH($this->galleries as $gallery): ?>
+
+    <a class="btn btn-outline"
+       href="<?=$this->url(array('id'=>$gallery['galleryid']), 'gallery-display'); ?>">
+        <span class="glyphicon glyphicon-link"></span> <?= $gallery['galleryname'] ?>
+    </a>
+
+<?php ENDFOREACH;?>
