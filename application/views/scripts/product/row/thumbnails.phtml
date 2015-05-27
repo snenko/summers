@@ -1,0 +1,18 @@
+<?php IF ($this->products): ?>
+
+    <div class="row">
+
+
+        <?php FOREACH ($this->products as $key => $p): ?>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+
+                <?= $this->partial('/product/row/thumbnail.phtml', array('product' => $p)); ?>
+
+            </div>
+            <?= $this->partial('/bootstrap/clearfix4.phtml', array('key' => $key)); ?>
+
+        <?php ENDFOREACH; ?>
+    </div>
+
+<?php ENDIF; ?>

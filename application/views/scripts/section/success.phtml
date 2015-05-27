@@ -1,0 +1,15 @@
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <h2><?= $this->translate('success'); ?></h2>
+                    <p><?= $this->translate(implode($this->messages)); ?></p>
+                    <?php IF($this->url): ?>
+                        <p><a href="<?= $this->url; ?>"><?= $this->gototext; ?></a></p>
+                    <?php ENDIF; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,63 +1,18 @@
-<br><br><br><br>
+<?= $this->partial('/section/jumbotron.phtml', array('title'=> $this->translate('Contacts'))); ?>
 
-<div class="gallery_name gallery_background">
-    <h2>Контакти</h2>
-</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
 
-<div class="gallery_block gallery_background" style="padding: 10px; min-width: 360px">
+            </div>
+        </div>
 
-    <p>Якщо у Вас є запитання чи пропозиції, скористайтеся формою для комунікації зі мною.</p>
-
-    <br>
-
-    <div>
-        <form class="wb_form" method="post">
-            <table>
-                <tbody>
-                <tr>
-                    <th style="text-align: right; vertical-align: top;">Ім’я&nbsp;&nbsp;</th>
-                    <td>
-                        <input type="hidden" name="wb_input_0" value="Ім’я">
-                        <input class="form-field" type="text" value="" name="wb_input_0">
-                    </td>
-                </tr>
-                <tr>
-                    <th style="text-align: right; vertical-align: top;">E-mail&nbsp;&nbsp;</th>
-                    <td>
-                        <input type="hidden" name="wb_input_1" value="E-mail">
-                        <input class="form-field" type="text" value="" name="wb_input_1">
-                    </td>
-                </tr>
-                <tr class="area-row">
-                    <th style="text-align: right; vertical-align: top;">Повідомлення&nbsp;&nbsp;</th>
-                    <td>
-                        <input type="hidden" name="wb_input_2" value="Повідомлення">
-                        <textarea class="form-field form-area-field" rows="3" cols="20" name="wb_input_2"></textarea>
-                    </td>
-                </tr>
-                <tr class="form-footer">
-                    <td>
-                    </td>
-                    <td>
-                        <button type="submit" class="btn">Відправити</button>
-                    <td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
-        <script type="text/javascript">
-            var formValues = [];
-            var formErrors = null;
-            wb_form_validateForm("d8ae2efc", formValues, formErrors);
-
-        </script>
+        <div class="row">
+            <div class="col-md-12">
+<!--                --><?//= $this->partial('/index/contacts/form.phtml'); ?>
+                <?= $this->form ?>
+            </div>
+        </div>
     </div>
-    <div id="wb_element_instance29" class="wb_element" style="width: 100%; display: none;">
-        <script type="text/javascript">
-            $(function () {
-                $("#wb_element_instance29").hide();
-            });
-        </script>
-    </div>
-
 </div>

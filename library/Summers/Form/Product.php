@@ -59,7 +59,7 @@ class Summers_Form_Product extends Summers_Form_Standart
 
         //--$element->addDecorator('HtmlTag',  array('tag' => 'div', 'class' => 'caption'));
 
-        $dir = Zend_Registry::get('config')->uploads->galleryPhotoDir_short;
+//        $dir = Zend_Registry::get('config')->uploads->galleryPhotoDir_short;
 
         // Groups
 

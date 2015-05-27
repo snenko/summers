@@ -31,12 +31,7 @@ class Summers_Form_Gallery extends Summers_Form_Standart
             ->addValidator('Size', false, '2048000')
             ->addValidator('Extension', false, 'jpg,png,gif')
             ->addValidator(
-                'ImageSize', false, array(
-                                         'minwidth'  => 340,
-                                         'minheight' => 170,
-                                         'maxwidth'  => 1500,
-                                         'maxheight' => 1500
-                                    )
+                'ImageSize', false, Summers_Snenko::getImageSize()
             );
         $picture->addDecorator('showPicture');
 

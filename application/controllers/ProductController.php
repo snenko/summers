@@ -13,15 +13,15 @@ class ProductController extends Zend_Controller_Action
         if ($this->_helper->getHelper('FlashMessenger')->getMessages()) {
             $this->view->messages = $this->_helper->getHelper('FlashMessenger')->getMessages();
         } else {
-            $this->_redirect('/');
+            $this->redirect('/');
         }
     }
 
     public function indexAction()
     {
         //повний список товарів
-        $products = Summers_Model_Product::getProducts_ByGalleries();
-        $this->view->products = $products;
+        //$this->view->products = (new Summers_Model_Product())->getListProducts();
+        $this->view->products = (new Summers_Model_Product())->getProducts();
     }
 
     public function createAction()
@@ -190,7 +190,8 @@ class ProductController extends Zend_Controller_Action
 
         if ($input->isValid()) {
 
-            $product = (new Summers_Model_Product)->getProduct($input->id);
+//            $product = (new Summers_Model_Product)->getProduct($input->id);
+            $product = (new Summers_Model_Product)->getProducts(array('products'=>$input->id));// ->getProduct($input->id);
             if (count($product) != 1) {
                 throw new Zend_Controller_Action_Exception('Page not found', 404);
             }

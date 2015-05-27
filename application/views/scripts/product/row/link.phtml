@@ -1,0 +1,12 @@
+<!--link-->
+<?php IF($this->link): ?>
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <a class="btn btn-link" href="<?= $this->escape($this->product['link']); ?>">
+                <?= $this->escape($this->product['link']); ?>
+            </a>
+
+        </div>
+    </div>
+<?php ENDIF; ?>

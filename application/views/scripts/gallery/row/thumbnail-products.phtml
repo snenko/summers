@@ -1,0 +1,33 @@
+<?php if ($this->products > 0): ?>
+
+    <div class="row">
+
+        <?php $dir = Summers_Snenko::getPhotoMdDir(); ?>
+
+        <?php FOREACH ($this->products AS $key=>$p): ?>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center">
+
+                <?= $this->partial('/product/row/product-admin-panel.phtml', array('productid' => $p['productid'])); ?>
+
+                <?php $p['picture'] = $dir . "/" . $this->escape($p['pictures'][0]); ?>
+
+                <?= $this->partial('/product/row/thumbnail.phtml', array('product' => $p)); ?>
+            </div>
+
+            <?= $this->partial('/bootstrap/clearfix3.phtml', array('key' => $key)); ?>
+
+        <?php ENDFOREACH; ?>
+
+    </div>
+
+<?php else: ?>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <?php echo $this->translate('not have products'); ?>
+        </div>
+    </div>
+
+<?php endif; ?>
+
+

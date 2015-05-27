@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 <html>
 <head>
-    <meta charset=utf-8"/>
+    <meta charset="utf-8">
     <?php echo $this->headTitle(); ?>
     <?php echo $this->headMeta(); ?>
+
+    <link rel="SHORTCUT ICON" href="/favicon.png" type="image/x-icon">
 
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
@@ -13,15 +15,17 @@
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
-    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/js/respond.min.js"></script>
     <script type="text/javascript">var currLang = '';</script>
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/docs.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/snenko-bootstrap-theme.css">
     <link href="/css/customer.css" rel="stylesheet" type="text/css"/>
+
     <?php echo $this->headLink(); ?>
     <?php echo $this->headScript(); ?>
 
@@ -35,23 +39,22 @@
     ?>
 </head>
 <body>
-<?= $this->partial('master/header.phtml', array('isadmin'=>$this->isadmin)); ?>
-<div class="container bs-docs-container">
-
     <!-- row 1: navigation -->
-
-    <!-- Breadcrumbs -->
+    <?= $this->partial('master/header.phtml', array('isadmin'=>$this->isadmin)); ?>
 
     <!-- row 2: content -->
     <?= $this->layout()->content; ?>
 
     <!-- row 3: footer -->
+    <?= $this->partial('master/footer.phtml'); ?>
 
-</div>
-<?= $this->partial('master/footer.phtml'); ?>
-<!-- javascript -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+    <!-- javascript -->
+<!--    <script src="http://code.jquery.com/jquery-latest.min.js"></script>-->
+<!--    <script src="/js/bootstrap.min.js" type="text/javascript"></script>-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
 

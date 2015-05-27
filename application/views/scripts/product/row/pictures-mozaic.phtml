@@ -1,0 +1,78 @@
+<?php
+//    $this->headScript()->headScript()->prependFile('/fancybox/jquery.fancybox-1.3.4.pack.js');
+//    $this->headLink()->appendStylesheet('/fancybox/jquery.fancybox-1.3.4.css');
+
+    $this->headLink()->appendStylesheet('/fancybox/jquery.fancybox.css');
+?>
+
+<style>
+    .thumb img {
+        filter: none; /* IE6-9 */
+        -webkit-filter: grayscale(0);
+        border-radius:5px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        /*padding:5px;*/
+    }
+    .thumb img:hover {
+        filter: gray; /* IE6-9 */
+        -webkit-filter: grayscale(1);
+    }
+    .thumb {
+        /*padding:5px;*/
+    }
+
+    .mosaicflow__column {
+        float:left;
+    }
+    .mosaicflow__item img {
+        display:block;
+        width:100%;
+        height:auto;
+    }
+
+</style>
+
+<!--<div class="row">-->
+<div class="clearfix mosaicflow">
+
+    <?php FOREACH($this->pictures as $key=>$picture): ?>
+
+        <?php $fn_orig = Summers_Snenko::img_src($picture, array('mask-dir'=>'orig')); ?>
+        <?php $fn_md = Summers_Snenko::img_src($picture, array('mask-dir'=>'md')); ?>
+
+<!--        <div class="col-md-4 col-sm-4 col-xs-6 thumb">-->
+        <div class="mosaicflow__item thumb">
+
+
+            <a class="fancyimage" rel="group" href="<?= $fn_orig ?>">
+                <img class="img-responsive" src="<?= $fn_md ?>" />
+            </a>
+
+        </div>
+
+
+        <?= $this->partial('/bootstrap/clearfix4.phtml', array('key' => $key)); ?>
+
+    <?php ENDFOREACH;?>
+
+</div>
+
+
+
+<script src="/js/jquery/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+    $("a.fancyimage").fancybox();
+</script>
+<script>
+    $('#mycontainer').mosaicflow({
+        itemSelector: '.item',
+        minItemWidth: 300
+    });
+</script>
+
+
+<script src="/jquery.mosaicflow-master/jquery.mosaicflow.min.js"></script>
+
+

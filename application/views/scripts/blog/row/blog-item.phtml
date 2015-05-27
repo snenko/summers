@@ -1,0 +1,27 @@
+<?php $blog = $this->blog; ?>
+
+<?= $this->partial('/blog/row/blog-admin-panel.phtml', array('blogid' => $blog['blogid'])); ?>
+
+<?php $url_blog_display = $this->url(array('id' => $blog['blogid']), 'blog-display'); ?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title"><?= $blog['title']; ?></h4>
+    </div>
+
+    <div class="panel-body">
+        <article>
+            <?= substr(strip_tags($blog['body'], '<br><br/>'), 0, 700); ?>
+            <hr>
+            <a class="btn btn-outline btn-sm" href="<?= $url_blog_display; ?>" role="button">
+                <?= $this->translate('Learn more') ?>
+                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+            </a>
+        </article>
+        <?= $this->partial('/blog/row/mask.phtml', array('mask' => $blog['mask'])); ?>
+    </div>
+
+    <div class="panel-footer">
+        <?= $this->dateFormat($blog['blogupdate'], 'dd MMM YYYY hh:mm'); ?>
+    </div>
+</div>

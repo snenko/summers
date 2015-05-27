@@ -8,6 +8,63 @@
 
 class Summers_Snenko
 {
+
+    static function getTitleProducts() {
+        $res='';
+        if($titleProducts = self::getSettings_config()->admin->titleProducts)
+            $res = $titleProducts->toarray();
+        return $res;
+    }
+
+    static function getImageSize() {
+        $imageSize = array(
+            'minwidth'  => 340,
+            'minheight' => 170,
+            'maxwidth'  => 2500,
+            'maxheight' => 2500
+        );
+        return $imageSize;
+    }
+
+    /**
+     * Генеруємо потрібний шлях до зображення
+     * @param       $file_name
+     * @param array $options = array(no-photo, dir, mask-dir=array(orig, md, thumbnail))
+     *
+     * @return string
+     */
+    static function img_src($file_name, $options=array())
+    {
+        $no_photo = ($options['no-photo'])?$options['no-photo']:'no-photo.png';
+        $dir = ($options['dir'])?$options['dir'] : Summers_Snenko::getPhotoMdDir();
+
+        switch ($options['mask-dir']) {
+            case 'orig':
+                $dir = Summers_Snenko::getPhotoDir();
+                break;
+            case 'md':
+                $dir = Summers_Snenko::getPhotoMdDir();
+                break;
+            case 'thumbnail':
+                $dir = Summers_Snenko::getPhotoThumbnailsDir();
+                break;
+        }
+
+        return $dir.'/'.(($file_name)?$file_name: $no_photo);
+    }
+
+    static function getLanguages() {
+        $lang = array(
+            'uk_UA'=>'українська',
+            'ru_RU'=>'русский',
+            'en_US'=>'english'
+        );
+
+
+//        $lang
+        return $lang;
+    }
+
     static function getCurrentDate()
     {
         return date('Y-m-d H:i:s', mktime());
@@ -192,6 +249,8 @@ class Summers_Snenko
         return $filter->filter("{$dir}/{$fn}");
     }
 
+    // шляхи до файлів
+
     /**
      * Повертає массив папок шляхів до зображень
      * @return mixed
@@ -210,7 +269,72 @@ class Summers_Snenko
      */
     static function getPhotoDir()
     {
-        return Zend_Registry::get('config')->uploads->galleryPhotoDir;
+        return Zend_Registry::get('config')->photos->dir;
+    }
+
+    static function getPhotoMdDir()
+    {
+        return Zend_Registry::get('config')->md->dir;
+    }
+
+    static function getPhotoThumbnailsDir()
+    {
+        return Zend_Registry::get('config')->thumbnails->dir;
+    }
+
+    /**
+     * get path to settings file
+     * @return mixed
+     */
+
+    static function getSetting_path(){
+        return Zend_Registry::get('config')->configs->localConfigPath;
+    }
+
+    static function getSettings_config()
+    {
+        $configs = Zend_Registry::get('config')->configs->localConfigPath;
+        //$i = new Zend_Config_Ini($configs['localConfigPath']);
+        $i = new Zend_Config_Ini($configs);
+        return $i;
+    }
+
+    // settings
+
+    /**
+     * get admin's settings
+     * logExceptionsToFile, itemsPerPage, adminEmailAddress
+     * @return mixed
+     */
+    static function getSettings_admin()
+    {
+        //дізнаємось конфігурацію файла
+        $configs = self::getSettings_config();
+        return $configs->admin;
+    }
+
+    /**
+     * get guest's settings
+     * guestEmailAddress, displaySellerInfo
+     * @return mixed
+     */
+    static function getSettings_guest()
+    {
+        //дізнаємось конфігурацію файла
+        $configs = self::getSettings_config();
+        return $configs->guest;
+    }
+
+    /**
+     * get user's settings
+     * guestEmailAddress, displaySellerInfo
+     * @return mixed
+     */
+    static function getSettings_user()
+    {
+        //дізнаємось конфігурацію файла
+        $configs = self::getSettings_config();
+        return $configs->user;
     }
 }
 

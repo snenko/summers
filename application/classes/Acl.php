@@ -51,6 +51,8 @@ class Acl extends Zend_Acl
         $this->addResource('blog');
         $this->addResource('login');
         $this->addResource('carousel');
+        $this->addResource('settings');
+        $this->addResource('locale');
 
         //Дозволи
         $this->allow(
@@ -59,14 +61,20 @@ class Acl extends Zend_Acl
             array('index', 'display')
         );
         $this->allow(self::ROLE_GUEST, 'index', array('contacts'));
-        $this->allow(self::ROLE_GUEST, 'login', array('login'));
+        $this->allow(self::ROLE_GUEST, 'index', array('success'));
+        $this->allow(self::ROLE_GUEST, 'login', array('login','success'));
+        $this->allow(self::ROLE_GUEST, 'locale', array('index'));
+
+        // --------------------------
+//        $this->allow( self::ROLE_GUEST, 'settings', array('update', 'index'));
+
         // user
 
-        $this->allow(self::ROLE_USER,
-            array('blog'),
-            array('comments')
-        );
-        $this->allow(self::ROLE_USER, 'login', array('logout', 'success'));
+//        $this->allow(self::ROLE_USER,
+//            array('blog'),
+//            array('comments')
+//        );
+        $this->allow(self::ROLE_USER, 'login', array('logout'));
 
         //admin
         $this->allow(self::ROLE_ADMIN); // allow admin access to all resources
