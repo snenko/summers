@@ -23,8 +23,7 @@ class Summers_Form_Carousel extends Summers_Form_Standart
             ->addFilter('StringTrim')
             ->addFilter('StringToUpper');
         foreach ((new Summers_Model_Product())->getProducts() as $v) {
-            $productid->addMultiOption($v['productid'], $v['name']);
-        }
+            $productid->addMultiOption($v['productid'], $v['name']);}
         $productid->addMultiOption('', '-');
 
         $description = new Zend_Form_Element_Textarea('description');

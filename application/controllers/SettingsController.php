@@ -31,6 +31,7 @@ class SettingsController extends Zend_Controller_Action
                     $config->guest->guestEmailAddress = $values['guestEmailAddress'];
                     $config->guest->langDefault = $values['langDefault'];
                     $config->admin->adminEmailAddress = $values['adminEmailAddress'];
+                    $config->admin->titleProducts = $values['titleProducts'];
 
                     $writer = new Zend_Config_Writer_Ini();
                     $writer->write(Summers_Snenko::getSetting_path(), $config);
@@ -50,6 +51,11 @@ class SettingsController extends Zend_Controller_Action
                 $data['langDefault'] = $config->guest->langDefault;
                 // admin
                 $data['adminEmailAddress'] = $config->admin->adminEmailAddress;
+                if($config->admin->titleProducts) {
+                    $data['titleProducts'] = $config->admin->titleProducts->toArray();
+                }
+
+
                 $form->populate($data);
             }
         }

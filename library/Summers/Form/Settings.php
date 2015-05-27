@@ -20,19 +20,6 @@ class Summers_Form_Settings extends Summers_Form_Standart
         $langDefault = (new Zend_Form_Element_Select('langDefault'))
             ->setLabel('language defaul')
             ->addMultiOptions(Summers_Snenko::getLanguages());
-//            ->setRequired(true)
-//            ->addValidator('Int')
-//            ->addFilter('HtmlEntities')
-//            ->addFilter('StringTrim')
-//            ->addFilter('StringToUpper')
-
-
-//        foreach ($this->getLang() as $lang=>$name) {
-//            $langDefault->addMultiOption($lang, $name);
-//        }
-
-//        $logExceptionsToFile = (new Zend_Form_Element_Checkbox('logExceptionsToFile'))
-//            ->setLabel('your message');
 
         // admin
         $adminEmailAddress = (new Zend_Form_Element_Text('adminEmailAddress'))
@@ -45,13 +32,23 @@ class Summers_Form_Settings extends Summers_Form_Standart
             ->addFilter('StringToLower')
             ->addFilter('StringTrim');
 
+        $translator = (new Zend_Form)
+
+        $titleProducts = (new Zend_Form_Element_MultiCheckbox('titleProducts'));
+        foreach ((new Summers_Model_Product())->getProducts() as $v) {
+            $titleProducts->addMultiOption($v['productid'], $v['name']);}
+
         // guest
         $this->addDisplayGroup(array($guestEmailAddress, $langDefault,), 'display-guest');
         $this->getDisplayGroup('display-guest')->setLegend('settings of guest');
 
         // admin
-        $this->addDisplayGroup(array($adminEmailAddress,), 'display-admin');
-        $this->getDisplayGroup('display-guest')->setLegend('settings of admin');
+        $this->addDisplayGroup(array($adminEmailAddress), 'display-admin');
+        $this->getDisplayGroup('display-admin')->setLegend('settings of admin');
+
+        // titleProducts
+        $this->addDisplayGroup(array($titleProducts,), 'display-titleProducts');
+        $this->getDisplayGroup('display-titleProducts')->setLegend('Title products');
 
         parent::init();
     }

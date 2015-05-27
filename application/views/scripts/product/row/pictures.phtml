@@ -21,31 +21,35 @@
     .thumb {
         padding:5px;
     }
+
 </style>
 
-<?php FOREACH($this->pictures as $key=>$picture): ?>
+    <div class="row">
 
-    <?php $fn_orig = Summers_Snenko::img_src($picture, array('mask-dir'=>'orig')); ?>
-    <?php $fn_md = Summers_Snenko::img_src($picture); ?>
+        <?php FOREACH($this->pictures as $key=>$picture): ?>
 
-        <div class="col-md-4 col-sm-6 col-xs-12 thumb">
-            <a class="fancyimage" rel="group" href="<?= $fn_orig ?>">
-                <img class="img-responsive" src="<?= $fn_md ?>" />
-            </a>
-        </div>
+            <?php $fn_orig = Summers_Snenko::img_src($picture, array('mask-dir'=>'orig')); ?>
+            <?php $fn_md = Summers_Snenko::img_src($picture, array('mask-dir'=>'md')); ?>
 
-<!--    --><?//= $this->partial('/bootstrap/clearfix3.phtml', array('key' => $key)); ?>
-<!--    --><?//= $this->partial('/bootstrap/clearfix3.phtml', array('key' => $key)); ?>
+            <div class="col-md-4 col-sm-4 col-xs-6 thumb">
 
-<?php ENDFOREACH;?>
+                <a class="fancyimage" rel="group" href="<?= $fn_orig ?>">
+                    <img class="img-responsive" src="<?= $fn_md ?>" />
+                </a>
+
+            </div>
+
+            <?= $this->partial('/bootstrap/clearfix4.phtml', array('key' => $key)); ?>
+
+        <?php ENDFOREACH;?>
+
+    </div>
+
 
 <script src="/js/jquery/jquery-1.11.2.min.js"></script>
-<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>-->
 <script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
-//    $(document).ready(function() {
-        $("a.fancyimage").fancybox();
-//    });
+    $("a.fancyimage").fancybox();
 </script>
 
 

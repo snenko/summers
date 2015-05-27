@@ -17,7 +17,9 @@ class IndexController extends Zend_Controller_Action
         $this->view->carousel = $carousel->getCarousels();
 
         //товари
-        $this->view->products = (new Summers_Model_Product())->getProducts(array('limit'=>4));
+        if($poduct_ids = Summers_Snenko::getTitleProducts())
+            $this->view->products = (new Summers_Model_Product())
+                ->getProducts(array('products'=>$poduct_ids));
 
         //статті
         $articles = (new Summers_Model_Blog())->getLastArticles(5);

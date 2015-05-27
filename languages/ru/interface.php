@@ -6,6 +6,7 @@ return array(
     'logo' => 'Summers',
     'sublabel' => 'Здесь вы найдете украшения для себя и ваших близких.',
     'phone' => '(+380)63 9999 999',
+    'connect for bye' => 'связаться для заказа',
 
     // Other
     'MENU'      => 'МЕНЮ',
@@ -81,6 +82,7 @@ return array(
     'not have products'   => 'Изделия Отсуствуют',
     'goto products' => 'Перейти к украшениям',
     'Product has deleted' => 'Украшение удалено',
+    'Title products' => 'Украшения на титульной',
 
     // Blog
     'blog'      => 'Блог',

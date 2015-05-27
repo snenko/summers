@@ -9,6 +9,13 @@
 class Summers_Snenko
 {
 
+    static function getTitleProducts() {
+        $res='';
+        if($titleProducts = self::getSettings_config()->admin->titleProducts)
+            $res = $titleProducts->toarray();
+        return $res;
+    }
+
     static function getImageSize() {
         $imageSize = array(
             'minwidth'  => 340,
