@@ -32,8 +32,6 @@ class Summers_Form_Settings extends Summers_Form_Standart
             ->addFilter('StringToLower')
             ->addFilter('StringTrim');
 
-        $translator = (new Zend_Form)
-
         $titleProducts = (new Zend_Form_Element_MultiCheckbox('titleProducts'));
         foreach ((new Summers_Model_Product())->getProducts() as $v) {
             $titleProducts->addMultiOption($v['productid'], $v['name']);}
