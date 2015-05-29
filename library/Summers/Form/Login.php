@@ -14,7 +14,7 @@ class Summers_Form_Login extends Zend_Form
              ->setRequired(true)
              ->addValidator('Alnum')            
              ->addFilter('HtmlEntities')            
-             ->addFilter('StringTrim');            
+             ->addFilter('StringTrim');
          
     // create text input for password
     $password = new Zend_Form_Element_Password('password');

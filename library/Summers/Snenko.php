@@ -35,19 +35,21 @@ class Summers_Snenko
      */
     static function img_src($file_name, $options=array())
     {
-        $no_photo = ($options['no-photo'])?$options['no-photo']:'no-photo.png';
-        $dir = ($options['dir'])?$options['dir'] : Summers_Snenko::getPhotoMdDir();
+        $no_photo = (array_key_exists('no-photo', $options))?$options['no-photo']:'no-photo.png';
+        $dir = (array_key_exists('dir', $options))?$options['dir'] : Summers_Snenko::getPhotoMdDir();
 
-        switch ($options['mask-dir']) {
-            case 'orig':
-                $dir = Summers_Snenko::getPhotoDir();
-                break;
-            case 'md':
-                $dir = Summers_Snenko::getPhotoMdDir();
-                break;
-            case 'thumbnail':
-                $dir = Summers_Snenko::getPhotoThumbnailsDir();
-                break;
+        if(array_key_exists('mask-dir', $options)){
+            switch ($options['mask-dir']) {
+                case 'orig':
+                    $dir = Summers_Snenko::getPhotoDir();
+                    break;
+                case 'md':
+                    $dir = Summers_Snenko::getPhotoMdDir();
+                    break;
+                case 'thumbnail':
+                    $dir = Summers_Snenko::getPhotoThumbnailsDir();
+                    break;
+            }
         }
 
         return $dir.'/'.(($file_name)?$file_name: $no_photo);

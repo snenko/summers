@@ -43,6 +43,7 @@ class GalleryController extends Zend_Controller_Action
             }
         }
 
+        $this->view->title = 'Create gallery';
         $this->view->form = $form;
     }
 
@@ -191,6 +192,7 @@ class GalleryController extends Zend_Controller_Action
                 throw new Zend_Controller_Action_Exception('Invalid input');
             }
         }
+        $this->view->title = 'Update gallery';
         $this->view->form = $form;
     }
 

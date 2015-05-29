@@ -32,8 +32,8 @@ class ProductController extends Zend_Controller_Action
                 'Int'))
         ))->setData($this->getRequest()->getParams());
 
-        $form = (new Summers_Form_Product())->populate($_POST);
-
+        $form = (new Summers_Form_Product())->populate($_POST)
+            ->setAction('/product/create');
         if ($this->getRequest()->isPost()) {
             if ($form->submit->isChecked()) {
 
@@ -65,9 +65,8 @@ class ProductController extends Zend_Controller_Action
             }
         }
 
-        $form->setAction('/product/create');
+        $this->view->title = 'Create product';
         $this->view->form = $form;
-
     }
 
     public function updateAction()
@@ -121,6 +120,7 @@ class ProductController extends Zend_Controller_Action
             }
         }
 
+        $this->view->title = 'Update product';
         $this->view->form = $form;
     }
 

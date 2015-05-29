@@ -1,10 +1,1 @@
-<div class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <?= $this->form; ?>
-            </div>
-        </div>
-    </div>
-</div>
-
+<?= $this->partial('section/form.phtml', array('form' => $this->form, 'title'=>$this->title) ); ?>

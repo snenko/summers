@@ -78,14 +78,11 @@
             <!--pictures-->
             <div class="col-md-6 col-lg-6 col-md-pull-6">
 
-<!--                <div class="panel panel-default">-->
-<!--                    <div class="panel-body">-->
-                        <?= $this->partial('/product/row/pictures-mozaic.phtml', array('pictures' => $this->product['pictures'])); ?>
-<!--                    </div>-->
-<!--                </div>-->
+                <?= $this->partial('/product/row/pictures-mozaic.phtml', array('pictures' => $this->product['pictures'])); ?>
 
             </div>
-
+        </div>
+        <div class="row">
             <div class="col-md-12 hidden-lg">
                 <!--gallerys-->
                 <?php IF($this->product['galleries']): ?>
@@ -96,7 +93,7 @@
                     </div>
                 <?php ENDIF; ?>
             </div>
-
+            <?= $this->partial('/product/row/product-admin-panel.phtml', array('productid' => $this->product['productid']));?>
         </div>
 
     </div>

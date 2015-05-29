@@ -39,6 +39,12 @@
         <resource>settings</resource>
         <privilege>update</privilege>
     </settings>
+    <translator>
+        <label>Translator</label>
+        <uri>/translator/list</uri>
+        <resource>translator</resource>
+        <privilege>list</privilege>
+    </translator>
     <carousel>
         <label>carousel</label>
         <uri>/carousel</uri>

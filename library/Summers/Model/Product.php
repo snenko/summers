@@ -101,11 +101,10 @@ class Summers_Model_Product extends Summers_Model_BaseProduct
      */
     public function getProducts($options=array())
     {
-        $limit=$options['limit'];
-        $galleryid=$options['galleryid'];
-        $products=$options['products'];
-
-        $order_by=($options['order_by'])?$options['order_by']: Doctrine_Core::getTable('Summers_Model_Product')->getIdentifier();
+        $limit=isset($options['limit'])?$options['limit']:'';
+        $galleryid=isset($options['galleryid'])?$options['galleryid']:'';
+        $products=isset($options['products'])?$options['products']:'';
+        $order_by=(isset($options['order_by']))?$options['order_by']: Doctrine_Core::getTable('Summers_Model_Product')->getIdentifier();
 
         $q = Doctrine_Query::create()
             ->select('p.*')

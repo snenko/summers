@@ -46,6 +46,7 @@ class CarouselController extends Zend_Controller_Action
             }
         }
 
+        $this->view->title = 'Create carousel';
         $this->view->form = $form;
     }
 
@@ -165,6 +166,7 @@ class CarouselController extends Zend_Controller_Action
                 throw new Zend_Controller_Action_Exception('Invalid input');
             }
         }
+        $this->view->title = 'Update carousel';
         $this->view->form = $form;
     }
 

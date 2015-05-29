@@ -26,8 +26,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             Doctrine::MODEL_LOADING_CONSERVATIVE
         );
 
-        $config = $this->getOption('doctrine');
-        $conn = Doctrine_Manager::connection($config['dsn'], 'doctrine')->setCharset('utf8');
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/database.ini');
+        $conn = Doctrine_Manager::connection($config->doctrine->dsn, 'doctrine')->setCharset('utf8');
 
         return $conn;
     }
@@ -62,30 +62,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $translate = new Zend_Translate(
             'array',
-            APPLICATION_PATH . '/../languages/',
+            Zend_Registry::get('config')->lang->dir,
             null,
             array(
                  'scan' => Zend_Translate::LOCALE_DIRECTORY,// Zend_Translate::LOCALE_FILENAME,
                  'disableNotices' => 1));
-//        $registry = Zend_Registry::getInstance();
-//        $registry->set('Zend_Translate', $translate);
-
-        //------------------------------------------------------------
-//        $translate = new Zend_Translate(
-//            'array',
-//            APPLICATION_PATH . '/../languages/',
-//            null,
-//            array('scan' => Zend_Translate::LOCALE_FILENAME, 'disableNotices' => 1)
-//        );
-        //============================================================
-
-//        $translator1 = new Zend_Translate(
-//            array(
-//                 "adapter" => "array",
-//                 "content" => APPLICATION_PATH . "/../languages",
-//                 "locale"  => "uk",
-//                 "scan"    => Zend_Translate::LOCALE_DIRECTORY
-//            ));
 
         Zend_Registry::getInstance()->set('Zend_Translate', $translate);
     }
@@ -112,7 +93,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $database = Zend_Db::factory($config->database);
         Zend_Db_Table::setDefaultAdapter($database);
-        //$database->getConnection();
+
         Zend_Registry::set("database", $database);
         return $database;
     }

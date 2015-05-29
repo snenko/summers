@@ -60,6 +60,7 @@ class SettingsController extends Zend_Controller_Action
             }
         }
 
+        $this->view->title = 'Settings';
         $this->view->form = $form;
     }
 

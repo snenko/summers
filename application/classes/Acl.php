@@ -53,6 +53,7 @@ class Acl extends Zend_Acl
         $this->addResource('carousel');
         $this->addResource('settings');
         $this->addResource('locale');
+        $this->addResource('translator');
 
         //Дозволи
         $this->allow(

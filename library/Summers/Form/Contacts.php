@@ -1,5 +1,5 @@
 <?php
-class Summers_Form_Contacts extends Zend_Form
+class Summers_Form_Contacts extends Twitter_Bootstrap_Form_Vertical
 {
 
     function init()
@@ -18,7 +18,7 @@ class Summers_Form_Contacts extends Zend_Form
             ->setRequired(true)
             ->addValidator('NotEmpty', true)
             ->addValidator('EmailAddress', true)
-            ->addFilter('HTMLEntities')
+            ->addFilter('HtmlEntities')
             ->addFilter('StringToLower')
             ->addFilter('StringTrim');
 
@@ -28,7 +28,7 @@ class Summers_Form_Contacts extends Zend_Form
             ->setOptions(array('rows' => '3'))
             ->setRequired(true)
             ->addValidator('NotEmpty', true)
-            ->addFilter('HTMLEntities')
+            ->addFilter('HtmlEntities')
             ->addFilter('StringTrim');
 
         $captcha = new Zend_Form_Element_Captcha('captcha',
@@ -45,6 +45,7 @@ class Summers_Form_Contacts extends Zend_Form
                      'font'    => APPLICATION_PATH . '/../public/fonts/LiberationSansRegular.ttf',
                  )
             ));
+        $captcha->addDecorators(Summers_Form_Standart::$decorators_captcha);
 
         $this->addDisplayGroup(
             array(
@@ -57,13 +58,40 @@ class Summers_Form_Contacts extends Zend_Form
 
 
 
-        $submit = (new Zend_Form_Element_Submit('submit'))
-            ->setLabel('send message')
-            ->setOptions(array('class' => 'submit'))
-                ->setOrder(3);
+//        $submit = (new Zend_Form_Element_Submit('submit'))
+//            ->setLabel('send message')
+//            ->setOptions(array('class' => 'submit'))
+//                ->setOrder(3);
 
-        $this->addElements(
-            array($submit)
+        $this->addElement(
+            'button', 'reset',
+            array(
+                 'decorators' => Summers_Form_Standart::$decorators_submit,
+                 'label'        => 'reset',
+                 'buttonType'   => Twitter_Bootstrap_Form_Element_Button::BUTTON_WARNING,
+                 'type'         => 'reset'
+                 ,'escape'        => true
+            )
+        );
+
+        $this->addElement(
+            'button', 'submit',
+            array(
+                 'decorators' => Summers_Form_Standart::$decorators_submit,
+                 'label'      => 'send message',
+                 'buttonType' => Twitter_Bootstrap_Form_Element_Button::BUTTON_SUCCESS,
+                 'type'       => 'submit'
+                 ,'escape'        => true
+            )
+        );
+
+        $this->addDisplayGroup(
+            array('submit', 'reset'),
+            'actions',
+            array(
+                 'disableLoadDefaultDecorators' => true,
+                 'decorators'                   => array('Actions')
+            )
         );
 
         parent::init();

@@ -26,6 +26,7 @@ class Summers_Form_Product extends Summers_Form_Standart
             ->setRequired(true)
             ->setOptions(array('StringLength', false, array(4, 255)))
             ->addFilter('StringTrim')
+            ->addDecorators(Summers_Form_Standart::$decorators_element)
             ->addValidator('NotEmpty');
         $description = new Zend_Form_Element_Textarea('description');
         $description->setLabel('description')
@@ -48,7 +49,7 @@ class Summers_Form_Product extends Summers_Form_Standart
             ->setDecorators(
                 array(
                      'ViewHelper',
-                     'PictureCheck',
+                     new Summers_Form_Decorator_PictureCheck(),//'PictureCheck',
                      'Errors',
                      'HtmlTag',
                      'Label',

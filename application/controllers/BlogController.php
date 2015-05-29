@@ -25,8 +25,7 @@ class BlogController extends Zend_Controller_Action
     public function createAction()
     {
         // action body
-        $form = new Summers_Form_Blog('/blog/create');
-        $form->populate($_POST);
+        $form = (new Summers_Form_Blog())->setAction('/blog/create')->populate($_POST);
 
         if ($this->getRequest()->isPost()) {
             if ($form->submit->isChecked()) {
@@ -52,12 +51,13 @@ class BlogController extends Zend_Controller_Action
             }
         }
 
+        $this->view->title = 'Create article';
         $this->view->form = $form;
     }
 
     public function updateAction()
     {
-        $form = (new Summers_Form_Blog('/blog/update'))->populate($_POST);
+        $form = (new Summers_Form_Blog())->setAction('/blog/update')->populate($_POST);
 
         if ($this->getRequest()->isPost()) {
             if ($form->submit->isChecked()) {
@@ -104,6 +104,7 @@ class BlogController extends Zend_Controller_Action
             }
         }
 
+        $this->view->title = 'Update article';
         $this->view->form = $form;
     }
 

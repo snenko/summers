@@ -18,14 +18,20 @@ class Zend_Controller_Action_Helper_Snenko extends Zend_Controller_Action_Helper
 //        }
 //    }
 
-    function gotoAfterAction($controller = 'index', $id='')
+    /**
+     * @param string $controller
+     * @param string $id
+     */
+    function gotoAfterAction($controller = 'index', $id='', $action ='')
     {
         $obj = $this->_actionController;
-        if ($id) {
-            $obj->redirect('/'.$controller.'/display/'.$id);
-        } else {
-            $obj->redirect('/'.$controller);
-        }
+
+//        if(!$action && $id) $action = 'display';
+
+        $action = (!$action && $id)?'/display':'/'.$action;
+        if ($id) $id = '/'.$id;
+
+        $obj->redirect('/'.$controller.$action.$id);
     }
 
 

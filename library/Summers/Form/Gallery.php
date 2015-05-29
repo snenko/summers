@@ -4,7 +4,8 @@ class Summers_Form_Gallery extends Summers_Form_Standart
 {
     public function init()
     {
-       $this->addPrefixPath('Summers_Form', 'Summers/Form');
+//       $this->addPrefixPath('prefix'=>'Summers_Form','path'='Summers/Form')
+       $this->addPrefixPaths( array('prefix'=>'Summers_Form','path'=>'Summers/Form') );
 
         $galleryid = (new Zend_Form_Element_Hidden('galleryid'))
             ->addValidator('Int')
@@ -33,7 +34,7 @@ class Summers_Form_Gallery extends Summers_Form_Standart
             ->addValidator(
                 'ImageSize', false, Summers_Snenko::getImageSize()
             );
-        $picture->addDecorator('showPicture');
+        $picture->addDecorator(new Summers_Form_Decorator_ShowPicture());
 
         $meta = new Zend_Form_Element_Text('meta');
         $meta->setLabel('meta')
