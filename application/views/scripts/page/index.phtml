@@ -1,0 +1,23 @@
+<?php // setup required dojo elements:
+
+$this->dojo()->enable()
+    ->setDjConfigOption('parseOnLoad', true)
+
+    ->requireModule("dijit.layout.AccordianContainer")
+    ->requireModule("dijit.layout.ContentPane")
+?>
+
+<?= $this->partial('/section/jumbotron.phtml', array('title'=> $this->translate('Pages'))); ?>
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <?= $this->partial('/page/row/page-admin-panel.phtml'); ?>
+                <?= $this->partial('/page/row/pages.phtml', array('pages' => $this->pages)); ?>
+
+            </div>
+        </div>
+
+    </div>
+</div>

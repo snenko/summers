@@ -91,7 +91,7 @@ class Summers_Model_Translator {
         );
     }
 
-    public function saveToFiles() {
+    public function save() {
         $transl = $this->getTranslates();
 
         $en=array();

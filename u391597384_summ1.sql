@@ -5,6 +5,7 @@
 -- HeidiSQL Версия:              9.1.0.4867
 -- --------------------------------------------------------
 
+
 -- Дамп структуры для таблица u391597384_summ.blog
 DROP TABLE IF EXISTS `blog`;
 CREATE TABLE IF NOT EXISTS `blog` (
@@ -60,11 +61,31 @@ CREATE TABLE IF NOT EXISTS `gallery` (
 
 -- Дамп данных таблицы u391597384_summ.gallery: 4 rows
 DELETE FROM `gallery`;
+/*!40000 ALTER TABLE `gallery` DISABLE KEYS */;
 INSERT INTO `gallery` (`galleryid`, `galleryname`, `description`, `picture`, `meta`) VALUES
 	(6, 'Кольє', 'Крупные украшения могут выглядеть как вызывающе, так и просто дополнять одежду - все зависит от того, как вы их носите.', 'image_55343775ac032.jpg', 'Кольє'),
 	(7, 'Сережки', 'Украшение, носимое в ушах, в которых для этого прокалываются специальные отверстия.\r\n\r\nРусское слово «серьга» заимствовано из древнерусского, где оно восходит к тюркскому «syrγa» — «кольцо». Серьги буквально — «ушные подвески в виде кольца.', 'image_553438ca9a7a2.jpg', 'Сережки'),
 	(8, 'Клатч', 'Маленькая элегантная сумочка-конверт. У клатча может быть маленькая ручка, не ремешок, но обычно его носят под мышкой или обхватив ладонью. Изготавливается из высококачественных материалов (например, крокодиловой или змеиной кожи), украшается золотом, жемчугом, стразами и перьями.', 'image_553438e6e1ed0.jpg', 'Клатч, сумочка'),
 	(27, 'Браслеты', 'женщина прекрасно приспособит данное изделие под один или несколько нарядов. Учитывая, что браслет – это универсальная вещь, подбирая его, не придется думать о том, какого размера следует подбирать данный предмет.', 'image_555f597248c1f.jpg', '');
+
+
+-- Дамп структуры для таблица u391597384_summ.page
+DROP TABLE IF EXISTS `page`;
+CREATE TABLE IF NOT EXISTS `page` (
+  `page_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `body` text NOT NULL,
+  `meta` varchar(255) DEFAULT NULL,
+  `status` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`page_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Дамп данных таблицы u391597384_summ.page: 1 rows
+DELETE FROM `page`;
+INSERT INTO `page` (`page_id`, `name`, `title`, `description`, `body`, `meta`, `status`) VALUES
+	(1, 'contacts', 'contacts', 'зберігаються контактні данні', '<div class="well">\r\n<p class="lead text-center">\r\n{{contacts-description}}\r\n</p>\r\n</div>\r\n<table class="table table-striped">\r\n    <tr><td colspan="2">{{phone}}</td></tr>\r\n    <tr><td>{{vk}}</td><td><a href="{{vk-url}}" target="_self">{{vk}}</a></td></tr>\r\n    <tr><td>{{fb}}</td><td><a href="{{fb-url}}" target="_self">{{fb}}</a></td></tr>\r\n    <tr><td colspan="2">{{phone}}</td></tr>\r\n</table>', '', NULL);
 
 
 -- Дамп структуры для таблица u391597384_summ.product
@@ -77,17 +98,38 @@ CREATE TABLE IF NOT EXISTS `product` (
   `url` text,
   `meta` varchar(255) DEFAULT NULL,
   `gallerys` text,
+  `price` varchar(255) DEFAULT NULL,
+  `status_id` int(5) DEFAULT NULL,
+  `hide_price` int(1) DEFAULT NULL,
+  `active` int(1) DEFAULT NULL,
   PRIMARY KEY (`productid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы u391597384_summ.product: 5 rows
+-- Дамп данных таблицы u391597384_summ.product: 6 rows
 DELETE FROM `product`;
-INSERT INTO `product` (`productid`, `name`, `description`, `pictures`, `url`, `meta`, `gallerys`) VALUES
-	(5, 'Сережки "Взгляд сокола."', 'Бусины натуральный камень - соколиный глаз.\r\nЦена 35 грн.', 'image_553439881f026.jpg', NULL, 'Бусины, натуральный камень', NULL),
-	(6, 'Колье "Омут"', 'Колье "Омут" Лабрадоры, сваровски, речной жемчуг, японский бисер ТОХО и Делика', 'image_553439de87ada.jpg,image_553439de8f372.jpg,image_553439de96c71.jpg,image_553439de9d573.jpg', NULL, 'Лабрадоры, сваровски, речной жемчуг, японский бисер ТОХО', NULL),
-	(7, 'Колье "Бриз".', 'Летнее колье для отпуска, пляжа и хорошего настроения.Чешский бисер, японский бисер, говлит, пауа( гелиотис) аммониты, жемчуг речной натуральный. Изнанка натуральная кожа.', 'image_55343a3bd4b26.jpg,image_55343a3bdd745.jpg', NULL, 'натуральная кожа, жемчуг речной натуральный, аммониты, чешский бисер, японский бисер, говлит', NULL),
-	(8, 'Колье "Апрельское утро"', 'Колье "Апрельское утро". Агаты, авантюрин, чешский и японский бисер. Сделано на заказ.', 'image_55343b05f30b8.jpg,image_55343b0607179.jpg,image_55343b060ddba.jpg', NULL, '', NULL),
-	(9, 'Колье-трансформер', 'Колье-трансформер .Сделано на заказ.', 'image_55343b47298ed.jpg,image_55343b4730725.jpg,image_55343b473683e.jpg,image_55343b473cf61.jpg', NULL, '', NULL);
+INSERT INTO `product` (`productid`, `name`, `description`, `pictures`, `url`, `meta`, `gallerys`, `price`, `status_id`, `hide_price`, `active`) VALUES
+	(5, 'Сережки "Взгляд сокола."', 'Бусины натуральный камень - соколиный глаз.\r\nЦена 35 грн.', 'image_553439881f026.jpg', NULL, 'Бусины, натуральный камень', NULL, NULL, NULL, NULL, 1),
+	(6, 'Колье "Омут"', 'Колье "Омут" Лабрадоры, сваровски, речной жемчуг, японский бисер ТОХО и Делика', 'image_556462113f13f.jpg,image_55646211777a4.jpg,image_55646211af639.jpg,image_55646211dd0bc.jpg,image_553439de87ada.jpg,image_553439de8f372.jpg,image_553439de96c71.jpg,image_553439de9d573.jpg', NULL, 'Лабрадоры, сваровски, речной жемчуг, японский бисер ТОХО', NULL, '70', 1, NULL, 1),
+	(7, 'Колье "Бриз".', 'Летнее колье для отпуска, пляжа и хорошего настроения.Чешский бисер, японский бисер, говлит, пауа( гелиотис) аммониты, жемчуг речной натуральный. Изнанка натуральная кожа.', 'image_55343a3bd4b26.jpg,image_55343a3bdd745.jpg', NULL, 'натуральная кожа, жемчуг речной натуральный, аммониты, чешский бисер, японский бисер, говлит', NULL, '100', 2, 1, 1),
+	(8, 'Колье "Апрельское утро"', 'Колье "Апрельское утро". Агаты, авантюрин, чешский и японский бисер. Сделано на заказ.', 'image_55343b05f30b8.jpg,image_55343b0607179.jpg,image_55343b060ddba.jpg', NULL, '', NULL, NULL, 2, NULL, 1),
+	(9, 'Колье-трансформер', 'Колье-трансформер .Сделано на заказ.', 'image_55343b47298ed.jpg,image_55343b4730725.jpg,image_55343b473683e.jpg,image_55343b473cf61.jpg', NULL, '', NULL, NULL, NULL, NULL, NULL),
+	(12, 'сережки "интересные"', 'Взгляд сокола.\r\nБусины натуральный камень - соколиный глаз.', 'image_556460ac64d1d.jpg,image_556460ae207bf.jpg,image_556460af43e68.jpg,image_556460b06618a.jpg,image_556460b1d10cc.jpg', NULL, '', NULL, NULL, NULL, NULL, NULL);
+
+
+-- Дамп структуры для таблица u391597384_summ.product_status
+DROP TABLE IF EXISTS `product_status`;
+CREATE TABLE IF NOT EXISTS `product_status` (
+  `status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` varchar(255) NOT NULL,
+  PRIMARY KEY (`status_id`),
+  UNIQUE KEY `status` (`status`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- Дамп данных таблицы u391597384_summ.product_status: 2 rows
+DELETE FROM `product_status`;
+INSERT INTO `product_status` (`status_id`, `status`) VALUES
+	(1, 'in stock'),
+	(2, 'for example');
 
 
 -- Дамп структуры для таблица u391597384_summ.sub_product_gallery
@@ -98,14 +140,15 @@ CREATE TABLE IF NOT EXISTS `sub_product_gallery` (
   PRIMARY KEY (`productid`,`galleryid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы u391597384_summ.sub_product_gallery: 5 rows
+-- Дамп данных таблицы u391597384_summ.sub_product_gallery: 6 rows
 DELETE FROM `sub_product_gallery`;
 INSERT INTO `sub_product_gallery` (`productid`, `galleryid`) VALUES
 	(5, 7),
 	(6, 6),
 	(7, 6),
 	(8, 6),
-	(9, 6);
+	(9, 6),
+	(12, 7);
 
 
 -- Дамп структуры для таблица u391597384_summ.user

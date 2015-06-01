@@ -4,14 +4,22 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-
+                <div class="well">
+                    <p class="lead text-center"><?= $this->translate('contacts-description') ?> </p>
+                </div>
             </div>
         </div>
-
         <div class="row">
-            <div class="col-md-12">
-<!--                --><?//= $this->partial('/index/contacts/form.phtml'); ?>
-                <?= $this->form ?>
+            <div class="col-md-6">
+                <?= $this->body; ?>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <?= $this->form ?>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

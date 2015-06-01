@@ -1,0 +1,28 @@
+<?php IF (Acl::getInstance()->getCurrentRole() == Acl::ROLE_ADMIN): ?>
+
+    <div class="btn-group" role="group">
+
+        <?php IF ($this->page_id): ?>
+
+            <?php $url_edit = $this->url(array('id' => $this->page_id), 'page-update'); ?>
+            <?php $url_delete = $this->url(array('id' => $this->page_id), 'page-delete'); ?>
+
+            <a class="btn btn-warning" href="<?= $url_edit; ?>" title="<?= $this->translate('page-update'); ?>">
+                <span class="glyphicon glyphicon-pencil"></span><?= $this->translate('page-update'); ?>
+            </a>
+            <a class="btn btn-danger" href="<?= $url_delete; ?>" title="<?= $this->translate('page-delete'); ?>">
+                <span class="glyphicon glyphicon-remove"></span><?= $this->translate('page-delete'); ?>
+            </a>
+
+        <?php ELSE: ?>
+            <?php $url_create = $this->url(array(), 'page-create'); ?>
+
+            <a class="btn btn-danger" href="<?= $url_create; ?>">
+                <?= $this->translate('page-create'); ?>
+            </a>
+
+        <?php ENDIF; ?>
+
+    </div>
+
+<?php ENDIF; ?>

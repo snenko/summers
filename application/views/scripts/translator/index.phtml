@@ -1,4 +1,34 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Translator</b> and script/action name <b>index</b></p>
-</div>
+<?php $num = 0; ?>
+<table class="table table-striped">
+    <tr class="warning">
+        <td>№</td>
+        <td><?= $this->translate('label') ?></td>
+        <td><?= $this->translate('russian') ?></td>
+        <td><?= $this->translate('ukrainian') ?></td>
+        <td><?= $this->translate('english') ?></td>
+        <td>
+            <a href="<?php echo $this->url(array(), 'translator-create', true); ?>"
+               class="btn btn-info">
+                <?= $this->translate('create') ?>
+            </a>
+        </td>
+    </tr>
+
+    <?php FOREACH ($this->translations as $label => $transl): ?>
+
+        <tr>
+            <td><?= $num++; ?></td>
+            <td><b><?= $label ?></b></td>
+            <td><?= $transl['ru'] ?></td>
+            <td><?= $transl['uk'] ?></td>
+            <td><?= $transl['en'] ?></td>
+            <td>
+                <a href="<?php echo $this->url(array('label' => $label), 'translator-update', true); ?>"
+                    class="btn btn-warning">
+                    <?= $this->translate('update') ?>
+                </a>
+            </td>
+        </tr>
+
+    <?php ENDFOREACH; ?>
+</table>

@@ -1,0 +1,48 @@
+<div>
+    <div class="panel-info">
+        <div class="page-header">
+            <?= $this->translate('name') ?>:
+        </div>
+        <div class="panel-body">
+            <?= $this->escape( $this->page['name']); ?>
+        </div>
+    </div>
+
+    <div class="panel-info">
+        <div class="page-header">
+            <?= $this->translate('title') ?>:
+        </div>
+        <div class="panel-body">
+            <?= $this->escape( $this->page['title']); ?>
+        </div>
+    </div>
+
+    <div class="panel-info">
+        <div class="page-header">
+            <?= $this->translate('meta') ?>:
+        </div>
+        <div class="panel-body">
+            <?= $this->escape( $this->page['meta']); ?>
+        </div>
+    </div>
+
+    <div class="panel-info">
+        <div class="page-header">
+            <?= $this->translate('decorator') ?>:
+        </div>
+        <div class="panel-body">
+            <?= $this->page['description']; ?>
+        </div>
+    </div>
+
+    <div class="panel-info">
+        <div class="page-header">
+            <?= $this->translate('body') ?>:
+        </div>
+        <div class="panel-body">
+            <?= Summers_Snenko::tegTranslateParser($this->page['body']); ?>
+        </div>
+    </div>
+
+    <div><?= $this->partial('/page/row/page-admin-panel.phtml', array('page_id' => $this->page['page_id'])); ?></div>
+</div>

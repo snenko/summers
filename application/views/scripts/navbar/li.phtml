@@ -10,20 +10,25 @@
     <?php if (!$hasChildren) { ?>
 
         <li>
-            <a href="<?php echo $page->getHref() ?>">
+            <?php if(array_key_exists('span', $page->toArray())){$title = $this->translate( $page->getLabel() );}?>
+
+            <a href="<?php echo $page->getHref() ?>" title="<?= $title ?>">
                 <?= $this->partial('navbar/span.phtml', array('page' => $page->toArray())); ?>
                 <?= $this->partial('navbar/ico.phtml', array('page' => $page->toArray())); ?>
-                <?php echo $this->translate($page->getLabel()) ?>
+                <?php if(!array_key_exists('span', $page->toArray())) {echo $this->translate($page->getLabel());}?>
             </a>
+
         </li>
 
     <?php } else { ?>
 
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php if(array_key_exists('span', $page->toArray())){$title = $this->translate( $page->getLabel() );}?>
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"  title="<?= $title ?>" >
                 <?= $this->partial('navbar/span.phtml', array('page' => $page->toArray())); ?>
                 <?= $this->partial('navbar/ico.phtml', array('page' => $page->toArray())); ?>
-                <?php echo $this->translate($page->getLabel()) ?>
+                <?php if(!array_key_exists('span', $page->toArray())) {echo $this->translate($page->getLabel());}?>
                 <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <?php foreach ($page->getPages() as $child) { ?>

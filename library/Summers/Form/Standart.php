@@ -3,6 +3,29 @@
 class Summers_Form_Standart extends Twitter_Bootstrap_Form_Vertical
 {
 
+    public static $options_dojo_editor = array(
+        'degrade' => true,
+        'class' => 'form-itemcreate',
+        'editActionInterval' => 2,
+        'focusOnLoad'        => true,
+        'height'             => '300px',
+        //'min-height'             => '100px',
+        'inheritWidth'       => true,
+        'plugins'=>
+        array(/*'undo','redo', 'selectAll', 'subscript','superscript', '|',*/
+            'foreColor', 'hiliteColor', '|',
+            //'cut','copy','paste','|',
+            'bold','italic','underline','strikethrough','|',
+            'insertOrderedList', 'insertUnorderedList','|',
+            'removeFormat','insertHorizontalRule', 'createLink', '|',
+
+            'createLink', 'insertImage', '|',
+            'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull', '|',
+            'indent', 'outdent', '|',
+            'viewSource',
+            /*'fontName', 'fontSize', 'formatBlock', '|',*/
+        ),);
+
     public static $decorators_dojo = array (
         // Dijit elements
         'Zend_Dojo_Form_Element_FilteringSelect' => array (

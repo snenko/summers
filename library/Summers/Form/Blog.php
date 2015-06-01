@@ -1,28 +1,6 @@
 <?php
 class Summers_Form_Blog extends Zend_Dojo_Form//Twitter_Bootstrap_Form_Inline
 {
-    private $options_notes = array(
-        'degrade' => true,
-        'class' => 'form-itemcreate',
-        'editActionInterval' => 2,
-        'focusOnLoad'        => true,
-        'height'             => '300px',
-        //'min-height'             => '100px',
-        'inheritWidth'       => true,
-        'plugins'=>
-        array(/*'undo','redo', 'selectAll', 'subscript','superscript', '|',*/
-            'foreColor', 'hiliteColor', '|',
-            //'cut','copy','paste','|',
-            'bold','italic','underline','strikethrough','|',
-            'insertOrderedList', 'insertUnorderedList','|',
-            'removeFormat','insertHorizontalRule', 'createLink', '|',
-
-            'createLink', 'insertImage', '|',
-            'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull', '|',
-            'indent', 'outdent', '|',
-            'viewSource',
-            /*'fontName', 'fontSize', 'formatBlock', '|',*/
-        ),);
 
     public function init()
     {
@@ -31,7 +9,7 @@ class Summers_Form_Blog extends Zend_Dojo_Form//Twitter_Bootstrap_Form_Inline
 
         Zend_Dojo::enableForm($this);
         $body = (new Zend_Dojo_Form_Element_Editor('body'))
-            ->setOptions($this->options_notes)
+            ->setOptions(Summers_Form_Standart::$options_dojo_editor)
             ->setLabel('body')
             ->addDecorators(Summers_Form_Standart::$decorators_dojo)
             ->setRequired(true)

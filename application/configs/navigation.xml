@@ -32,31 +32,6 @@
         <privilege>contacts</privilege>
     </contacts>
 
-    <!--адмінка-->
-    <settings>
-        <label>Settings</label>
-        <uri>/settings</uri>
-        <resource>settings</resource>
-        <privilege>update</privilege>
-    </settings>
-    <translator>
-        <label>Translator</label>
-        <uri>/translator/list</uri>
-        <resource>translator</resource>
-        <privilege>list</privilege>
-    </translator>
-    <carousel>
-        <label>carousel</label>
-        <uri>/carousel</uri>
-        <resource>carousel</resource>
-        <privilege>index</privilege>
-    </carousel>
-    <logout>
-        <label>logout</label>
-        <uri>/logout</uri>
-        <resource>login</resource>
-        <privilege>logout</privilege>
-    </logout>
     <!--languages-->
     <lang>
         <label></label>
@@ -88,5 +63,47 @@
 
         </pages>
     </lang>
+
+    <!--адмінка-->
+    <settings>
+        <label>Settings</label>
+        <uri>index</uri>
+        <resource>settings</resource>
+        <span>glyphicon glyphicon-cog</span>
+        <pages>
+            <settings_update>
+                <label>Settings</label>
+                <uri>/settings</uri>
+                <resource>settings</resource>
+                <privilege>update</privilege>
+            </settings_update>
+            <translator>
+                <label>translator</label>
+                <uri>/translator</uri>
+                <resource>translator</resource>
+                <privilege>index</privilege>
+            </translator>
+            <page>
+                <label>pages</label>
+                <uri>/page</uri>
+                <resource>page</resource>
+                <privilege>index</privilege>
+            </page>
+            <carousel>
+                <label>carousel</label>
+                <uri>/carousel</uri>
+                <resource>carousel</resource>
+                <privilege>index</privilege>
+            </carousel>
+        </pages>
+    </settings>
+
+    <logout>
+        <label>Logout</label>
+        <uri>/logout</uri>
+        <span>glyphicon glyphicon-log-out</span>
+        <resource>login</resource>
+        <privilege>logout</privilege>
+    </logout>
 
 </config>

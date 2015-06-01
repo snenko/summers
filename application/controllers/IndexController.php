@@ -52,6 +52,25 @@ class IndexController extends Zend_Controller_Action
         }
 
         $this->view->form = $form;
+
+//    `page_id` INT(11) NOT NULL AUTO_INCREMENT,
+//	`name` VARCHAR(50) NOT NULL,
+//	`title` VARCHAR(255) NOT NULL,
+//	`description` TEXT NOT NULL,
+//	`body` TEXT NOT NULL,
+//	`meta` VARCHAR(255) NULL DEFAULT NULL,
+//	`status` VARCHAR(1) NULL DEFAULT NULL,
+        // information block
+        $pageName = 'contacts';
+        $contacts = Doctrine::getTable('Summers_Model_Page')->findBy('name', $pageName);
+
+        if (count($contacts) > 0) {
+            $this->view->title = $contacts[0]->title;
+            $this->view->description = $contacts[0]->description;
+            $this->view->body = Summers_Snenko::tegTranslateParser($contacts[0]->body);
+        }
+
+
     }
 
     public function successAction()

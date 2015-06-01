@@ -54,6 +54,7 @@ class Acl extends Zend_Acl
         $this->addResource('settings');
         $this->addResource('locale');
         $this->addResource('translator');
+        $this->addResource('page');
 
         //Дозволи
         $this->allow(

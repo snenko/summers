@@ -8,6 +8,36 @@
 
 class Summers_Snenko
 {
+//<dev>
+//{{phone}}:<b>{{phone-number}}</b> <br />
+//{{vk}}:<b><a href="{{vk-url}}">{{vk-url}}</a></b> <br />
+//{{fb}}:<b><a href="{{fb-url}}">{{fb-url}}</a></b> <br />
+//</dev>
+
+    /**
+     * замінює в тексті теги {{*}} на значання із перекладача
+     * @param        $context
+     * @param string $find
+     *
+     * @return mixed
+     */
+    public static function tegTranslateParser($context, $find='') {
+        if(!$find)
+            $find = "/\{\{[^\{]*\}\}/i";
+
+        $keys=array();
+        preg_match_all($find,$context, $keys);
+
+        $translate = Zend_Registry::get('Zend_Translate');
+
+        $r = array();
+        foreach($keys[0] as $k=>$v)
+            $r[$k]=$translate->_(str_replace(array("{{","}}"),'',$v));
+
+        $str= str_replace($keys[0], $r, $context);
+
+        return $str;
+    }
 
     static function getTitleProducts() {
         $res='';

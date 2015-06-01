@@ -10,7 +10,7 @@ class TranslatorController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        $this->view->translations = (new Summers_Model_Translator())->getTranslates();
     }
 
     public function updateAction()
@@ -26,18 +26,18 @@ class TranslatorController extends Zend_Controller_Action
 
                     $item = Doctrine::getTable('Summers_Model_Carousel')->find($values['carousel_id']);
 
-                    $item = (new Summers_Model_Translator);
+                    $item = new Summers_Model_Translator();
                     $item->fromArray($values);
-                    $item->saveToFiles();
+                    $item->save();
 
                     if ($item->getErrors()) {
                         throw new Zend_Controller_Action_Exception('Invalid saved');
                     }
-                    $this->_helper->snenko->gotoAfterAction('translator',null, 'list');
+                    $this->_helper->snenko->gotoAfterAction('translator');
                 }
 
             } elseif ($form->cancel->isChecked()) {
-                $this->_helper->snenko->gotoAfterAction('translator/list');
+                $this->_helper->snenko->gotoAfterAction('translator');
             }
 
         } else {
@@ -70,13 +70,37 @@ class TranslatorController extends Zend_Controller_Action
 
     public function createAction()
     {
-        // action body
+        $form = (new Summers_Form_Translator())->setAction('/translator/create')->populate($_POST);
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->submit->isChecked()) {
+
+                $postData = $this->getRequest()->getPost();
+                if ($form->isValid($postData)) {
+                    $values = $form->getValues();
+
+                    $page = new Summers_Model_Translator();
+                    $page->fromArray($values);
+                    $page->save();
+
+                    if ($page->getErrors()) {
+                        throw new Zend_Controller_Action_Exception('Invalid saved');
+                    }
+                    $this->_helper->snenko->gotoAfterAction('translator');
+                }
+            } elseif ($form->cancel->isChecked()) {
+                $this->_helper->snenko->gotoAfterAction('translator');
+            }
+        }
+        $form->label->setAttrib('readonly', null);
+        $this->view->title = 'Create translate';
+        $this->view->form = $form;
     }
 
     /*вивести весь список фраз для перекладу*/
     public function listAction()
     {
-        $this->view->translations = (new Summers_Model_Translator())->getTranslates();
+
     }
 
 

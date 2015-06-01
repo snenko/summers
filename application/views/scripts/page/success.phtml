@@ -1,0 +1,5 @@
+<?= $this->partial('section/success.phtml',
+    array('messages' => $this->messages,
+          'url'      => $this->url(array(), 'gallery-index'),
+          'gototext' => $this->translate('goto gallery')));
+?>

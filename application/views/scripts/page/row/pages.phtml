@@ -1,0 +1,14 @@
+<?php IF ($this->pages): ?>
+
+    <?php FOREACH ($this->pages as $page): ?>
+
+        <?= $this->partial('/page/row/page.phtml', array('page' => $page)); ?>
+
+    <?php ENDFOREACH; ?>
+
+<?php ELSE: ?>
+
+    <p><?php echo $this->translate('not have records'); ?></p>
+
+<?php ENDIF; ?>
+                

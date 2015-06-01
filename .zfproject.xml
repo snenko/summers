@@ -69,6 +69,14 @@
           <actionMethod actionName="create"/>
           <actionMethod actionName="list"/>
         </controllerFile>
+        <controllerFile controllerName="Page">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="create"/>
+          <actionMethod actionName="update"/>
+          <actionMethod actionName="delete"/>
+          <actionMethod actionName="success"/>
+          <actionMethod actionName="display"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory enabled="false"/>
@@ -199,6 +207,24 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Translator">
             <viewScriptFile forActionName="list"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Page">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Page">
+            <viewScriptFile forActionName="create"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Page">
+            <viewScriptFile forActionName="update"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Page">
+            <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Page">
+            <viewScriptFile forActionName="success"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Page">
+            <viewScriptFile forActionName="display"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
